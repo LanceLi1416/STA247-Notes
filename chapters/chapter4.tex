@@ -1,0 +1,114 @@
+\chapter{Discrete Distributions}
+
+\section{Random Variable}
+
+\section{Cumulative Distribution Function}
+
+The probability behaviour of a random variable can be represented in many ways, such as with the probability mass function. Another representation is with the \term{cumulative distribution function}.
+
+\begin{definition}[Cumulative Distribution Function]\index{Cumulative Distribution Function}
+    The \term{cumulative distribution function} (CDF) $F(x)$ of a discrete random variable with probability mass function $P(x)$ or $f(x)$ is a function that returns the cumulative (total) probability up to and including $X = x$. $$F(b) = P(X \le b) = \sum_{x \in \{ x \le b \}} P(x)$$ The domain of the CDF is always over the set of real numbers! As such, CDFs are often represented as a piecewise function.
+\end{definition}
+
+\begin{example}
+    Find the cumulative distribution function for PMF below:
+
+    \begin{center}
+        \everymath{\displaystyle}
+        \begin{tabular}{ | c | c | c | c | c |}
+            \hline
+            $x$ & $0$ & $1$ & $2$ & $3$ \\
+            \hline
+            $P(X = x)$ & $\frac{1}{6}$ & $\frac{1}{2}$ & $\frac{3}{10}$ & $\frac{1}{30}$ \\
+            \hline
+        \end{tabular}
+    \end{center}
+    
+    $$F(x) = \begin{cases}
+        \frac{1}{6} \\
+        \frac{2}{3} \\
+        \frac{29}{30} \\
+        1
+    \end{cases}$$
+\end{example}
+
+\subsection{Properties of CDF}
+
+\textbf{CDF of a Discrete Random Variable}
+
+For a discrete random variable $X$ with CDF $F(X)$:
+
+\begin{enumerate} \everymath{\displaystyle}
+    \item The graph of the CDF will be a \bred{non-decreasing step-function}. That is for $a < b$, $F(a) \le F(b)$. 
+    \item The graph of the CDF is \bred{right continuous}. That is, $\lim_{x \to c^+} F(x) = F(c)$. 
+    \item $\lim_{x \to \infty} F(x) = 1$
+    \item $\lim_{x \to -\infty} F(x) = -1$
+\end{enumerate}
+
+%TODO
+Add Stuff Here (Week 5 page 17 - 20)
+%TODO
+
+\section{Chebyshev's Inequality}
+
+\begin{theorem}[Chebyshev's Inequality]\index{Chebyshev's Inequality}
+    Let $X$ be a random variable with mean (expected value) $\mu$ and finite variance $\sigma^2$. Then for any positive $k$, $$P(|x - \mu| {\color{red}~<~} k\sigma) \ge 1 - \frac{1}{k^2}$$
+\end{theorem}
+
+\begin{proof}
+    By Markov's Inequality: for non negative $x$, $P(x \ge a) \le \frac{E(x)}{a}$, $a > 0$. 
+
+    $\begin{aligned}[t]
+        P(|X - \mu| < k\sigma) & = P((x - \mu)^2 < k^2\sigma^2) &\text{since RV's are non-nagative}
+    \end{aligned}$
+
+    %TODO
+    FINISH THE PROOF
+    %TODO
+\end{proof}
+
+\begin{example}
+    Based on past data, the average daily number of tech support requests at a local call centre is 115 with a standard deviation of 10 calls.
+
+    \begin{enumerate}[label=\alph*)]
+        \item What can be said about the fraction of days on which the number of calls received is between 100 and 130?
+        
+        Dist info: missing 
+        
+        We are given: $\mu = 115$, $r = 10$
+
+        Let $C$ be the random number of daily calls. 
+
+        $\begin{aligned}[t]
+            P(100 \le C \le 130) & = P(-15 \le C - 115 \le 15) \\
+                                 & = P(-15 \le C - \mu \le 15) \\
+                                 & = P(|C - \mu| \le 15) \\
+                                 & = P(|C - \mu| < 16) \\
+                                 & = P(|C - \mu| < 1.6\sigma) \\
+                                 & \ge 1 - \frac{1}{1.6} = 0.6094
+        \end{aligned}$
+
+        $\therefore$ At least $60.94\%$ of the time they will have between 100 to 130 calls a day. 
+
+        \item What number of calls can they expect to receive at least $90\%$ of the time?
+    \end{enumerate}
+\end{example}
+
+\section{Common Discrete Distributions}
+
+\subsection{Bernoulli Trials}
+
+\begin{definition}[Bernoulli Trials]\index{Bernoulli Trials}
+    A \term{Bernoulli trial} is a random experiment consisting of exactly one trial involving two possible outcomes, often called a \itblue{success} or a \itblue{failure}. Let $X$ be the outcome of a Bernoulli trial where 
+    %TODO
+    FINISH on PAGE 24
+    %TODO
+\end{definition}
+
+Often, we are interested in modeling the number of successes among multiple trials instead of the results of a single trial:
+
+\begin{definition}[Binomial Distribution]\index{Binomial Distribution}
+    A \term{Binomial experiment} consists of $n$ independent and identical Bernoulli trials. The probability of success, $p$, is fixed for each trial. 
+
+    Let $X$ be the random variable representing the number of successes among the $n$ trials. Then $X$ can be modeled by the binomial distribution with parameters $n$ and $p$, denoted as $X \sim \mathrm{Bin}(n, p)$. The binomial distribution has probability mass function: $$O(X = x) = {n \choose x} \cdot p^x \cdot (1 - p)^{n - x}$$ If $X \sim \mathrm{Bin}(n, p)$, we can show that $E(X) = np$ and $V(X) = np(1 - p)$
+\end{definition}

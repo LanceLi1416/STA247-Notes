@@ -1,0 +1,136 @@
+\chapter*{Introduction} \addcontentsline{toc}{chapter}{Introduction}
+
+This is an introductory course to probability, where our main focus will be developing an understanding of probability and the concept of probability distributions, both for discrete and continuous quantities. This includes developing the intuition for how probabilities `behave' and the situations in which it is valid to describe randomness using probability, as well as relying on simulations in R to help us visualize these properties.
+
+By the end of the course, students should be able to...
+
+\begin{itemize}
+    \item Describe random quantities in various ways, such as by: their features, density functions, distribution functions, graphs
+    \item Select an appropriate probability model based on their unique properties to quantify the randomness of random quantities
+    \item Compute and interpret the various features of a random quantity: expected value, variance, standard deviation, correlation, covariance, event probabilities (either exactly, through approximations, or simulation)
+    \item Select the most appropriate model to represent randomness and compute probabilities
+    \item Use simulation in R for estimation purposes
+    \item Explain the relationship of transforming a random variable and its effect on its distribution
+    \item Use bivariate distributions to describe the association between two random quantities
+\end{itemize}
+
+\section*{Textbooks} \addcontentsline{toc}{section}{Textbooks}
+
+We will be referencing these two textbooks regularly:
+
+\begin{enumerate}
+    \item \textit{Probability with Applications and R}, 2nd ed. by \textit{Wagaman and Dobrow} through the library \href{https://books-scholarsportal-info.myaccess.library.utoronto.ca/en/read?id=/ebooks/ebooks6/wiley6/2021-06-14/1/9781119692430#page=2}{here} and with student companion site \href{https://bcs.wiley.com/he-bcs/Books?action=index&itemId=1119692385&bcsId=12094}{here}.
+    \item \textit{Modern Mathematical Statistics with Applications}, 3rd ed. by \textit{Devore and Berk} available through the library \href{https://login.library.utoronto.ca/index.php?url=https://link.springer.com/10.1007/978-3-030-55156-8}{here}.
+\end{enumerate}
+
+We will be using R throughout the course to help us understand probability distributions, and to simulate probabilities for quantities that are harder to compute by hand. R Markdown files will be provided for you with necessary starter code.  You'll also gain some experience with using \LaTeX to produce documents with well-presented math notation.
+
+For new users to R, you may find chapters 3-7 from \href{https://r4ds.had.co.nz/}{R for Data Science} to be helpful as reference material in data visualization and data manipulation tools in R.
+
+\section*{Course Information} \addcontentsline{toc}{section}{Course Information}
+
+All course-related materials can be found on our Quercus page:
+
+\begin{itemize}
+    \item \textbf{Lectures} are held in MC 102 for both sections. We begin 10 minutes after the hour, and no recordings will be provided. 
+    \item \textbf{Weekly materials} such as slides, suggested problems for practice, and reminders of upcoming due dates are posted each week's page on our course home page. 
+    \item \textbf{Tutorial materials} will be distributed at the beginning of your tutorial. 
+    \item \textbf{Announcements}: this is the primary channel to distribute important information to everyone! You're expected to check and read announcements regularly to ensure you don't miss any important communication! 
+    \item \textbf{Assignments} and documents will be distributed and submitted through Crowdmark.
+\end{itemize}
+
+\section*{Discussion Board} \addcontentsline{toc}{section}{Discussion Board}
+
+Throughout the term, beginning September 14, there will be pinned weekly discussions on our discussion board page. They will remain pinned from Wednesday 8 AM to the following Tuesday 8 PM.
+
+\begin{itemize}
+    \item \textbf{General Q\&A page}: general questions, clarifications, request for additional explanations, share your thoughts/understanding of topics 
+    \item \textbf{Grouped practice problem discussions}: post your solutions, thoughts, approaches, questions here for that collection of textbook questions.
+    \begin{itemize}
+        \item Each discussion thread (i.e. reply to one original comment) is dedicated to ONE question, labeled in bold in the original comment
+    \end{itemize}
+\end{itemize}
+
+You earn your discussion board credits by contributing at least five (5) times during this course to any of the discussions during the pinned period (Wednesday to Tuesday) in any of the following ways:
+
+\begin{itemize}
+    \item Posting a question to a problem you tried, with a clear explanation of your process, and if you got stuck: what you tried to do, and where you need help moving forward 
+    \item Responding to a question with a thoughtful explanation to help your peer by sharing your own understanding of the problem 
+    \item Posting to the general Q\&A page with your own question, about a course topic that is still unclear and being specific in describing what you do not understand (and perhaps what you did understand!) 
+    \item Providing a detailed and clear response to a question in the general Q\&A page
+\end{itemize}
+
+To ensure boards are easy to reference, posting similar content is discouraged and these would be ineligible for earning credits.
+
+\begin{itemize}
+    \item Only contributions during the pinned period will be counted. The discussions will remain open the rest of term for students who come across new problems or would like to continue the discussions. 
+    \item You are encouraged to keep the discussion going, but in terms of credit, it will be capped at 5 points. 
+    \item While there is no weekly cap on points, the maximum points you can earn in the last two weeks is 2 points, with no more than 2 points per week (i.e. don't wait to the last minute to participate in the class discussion). 
+    \item The discussion boards exist to facilitate peer-to-peer collaboration and learning, while also encouraging regular active engagement with course content. The course offers many opportunities that most students shouldn't find themselves unable to contribute in a unique way.
+\end{itemize}
+
+\subsection*{Why a Discussion Board?}
+
+\begin{itemize}
+    \item There are records and studies that have shown the process of explaining and teaching to others is an effective way to learn, consolidate, and retain what has been taught. See \href{https://digest.bps.org.uk/2018/05/04/learning-by-teaching-others-is-extremely-effective-a-new-study-tested-a-key-reason-why/}{here} and \href{https://scholar.princeton.edu/sites/default/files/cognition/files/impairment_effect.pdf}{here}.
+    \item It's a space for students to come together to work collaboratively, receive and provide peer support. 
+    \item It's also a space to get feedback and guidance from TAs and myself. 
+    \item It's a good opportunity to self-assess (`how comfortable am I explaining this to another student?', `how often do I need to refer back to my notes to explain this concept clearly?') -- an important component of good study skills! 
+    \item It's valuable information to us! Common questions/misunderstandings that pop up in the weekly discussions can be addressed during our weekly lecture meetings.
+\end{itemize}
+
+\subsection*{Discussion Board Rubric}
+
+\begin{center}
+    \begin{tabular}{ | p{0.1\linewidth} | p{0.25\linewidth} | p{0.25\linewidth} | p{0.25\linewidth} | }
+        \hline
+        Points & 1 point & 0.5 points & 0 points \\
+        \hline
+        Quality of contribution & Student has made a substantial and unique contribution with detailed explanations and/or clearly outlined process of the approach to a problem. & Student has made a contribution to the discussion that is dismissive, lacking in detail, or not completely unique. Unable to further the discussion in a way that fosters a collaborative learning environment. & Student has not contributed to the weekly discussion topic thread, or whose posts are off-topic/irrelevant/do not contribute to the thread or is not unique to what has already been discussed in the thread. \\ & & & \\
+        & Student was involved in follow-up discussions and worked collaboratively with their peers to develop a better understanding of the concepts involved. & e.g. responses such as `you just need to integrate this and solve for it' or `I got the same answer doing... (reiterates OPs process)' & e.g. `I got the same answer', `How did you get that number?' \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Tutorial}
+
+\begin{itemize}
+    \item A mix of R labs and collaborative pair work 
+    \item R labs: These labs have guided exercises to practice the R tools covered in class or learn new R skills. Labs will be TA-guided. 
+    \item R labs require individual .rmd and knitted document submissions at the end of tutorial (Note that the labs are guided and meant to be completed within the tutorial time) 
+    \item Pair work: In your tutorial section, you will with a partner of your choice work on more challenging but guided problems together. Discussion and sharing your ideas is a great way to learn from one another, and consider different approaches to problem solving! TAs will be there to support and help answer clarification questions.
+\end{itemize}
+
+\subsection*{Habits for Success}
+
+\begin{itemize}
+    \item Attend and participate in lecture. Try to work along with the problems presented. Ask questions and interact with your peers during the open work periods! 
+    \item Make sure you focus on \textit{understanding} the concepts and how they relate and build upon each other. This one is hard! 
+    \item Regularly attempt as many of the suggested problems as you can and work towards being able to work on the problems closed book. Use this to gauge your familiarity with the material -- if it takes you an hour to work through two problems, then it's a good indication to seek out advice and support from the teaching team. The earlier, the better! 
+    \item Drop by during the office hours or post on discussion board if you get stuck. Work through practice problems with classmates. Take turns \textit{explaining} your thinking and problem solving process. 
+    \item \textbf{Create a schedule and stick with it}. This course covers many topics to ensure you have a good foundation for latter courses. Many topics build on top of each other so falling behind can quickly snowball and make it difficult to catch up.
+\end{itemize}
+
+\textbf{Some Suggestions from Previous Students}
+
+\begin{enumerate}
+    \item Will the final be cumulative?
+
+    Yes. 
+    
+    \item I find that I \textit{really} struggle with keeping my mind focused on the question I'm presenting working on, and not think about how a similar question was solved previously. I thought I was making some progress, but then I realized this wasn't the case at all after today when I spent 30 minutes trying to recall the solution I wrote for A2 (I don't remember even reading the test question..I just caught a few phrases and began regurgitating my assignment solution incorrectly).
+
+    I realize the most helpful thing I can do for myself now is to practice regularly, but I can't say I've been doing that well. For the last week, I've been attempting the textbook questions (open book )in preparation for the test. For the final, I plan to solve questions independently, which was something I didn't do until last minute. What else can I do to improve my problem-solving/critical thinking skills?
+
+    Definitely do textbook / slide questions closed book. The only thing you should be looking at is the sample aid sheet. Otherwise you will never know if you actually understand the material.
+
+    \item You need to know when you don't know something. Meaning that when you see a question, you need to recognize if you actually know how to solve it or not. And if you don't know how to solve it you need to skip it and go to the next question. I'm sure you know that spending 30 min on any question is not an efficient use of the time.  
+    
+    \item Go to office hours. There is only like 2 other people that I've ever seen at office hours.
+    
+    \item What does data have to look like for an exponential distribution to describe it?
+
+    Why do we use different distributions? What's the importance of justifying a decision to use one distribution over another? (the textbook often tells you the distribution so image all of the questions posed to you without that information. Would you still be confident?) Answering these questions thoroughly will make you a lot better at figuring out how to approach a question when you see it.
+
+    Understanding the conceptual side in depth is the most important part of studying I would think. Computational skills come with practice, eventually you get it. But usually the problem with stats or courses like this is interpreting the question - is figuring out how to even approach the question in the first place. Knowing how to solve all of the normal distribution questions that confront you is great, but that won't help you if you can't even recognize when and when not to use it.
+\end{enumerate}
