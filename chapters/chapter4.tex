@@ -2,6 +2,69 @@
 
 \section{Random Variable}
 
+\begin{definition}[Random Variable]\index{Random Variable}
+    A \term{random variable} is a real-valued function that assigns a numerical value to each event in the sample space $\Omega$ arising from a random experiment. A random variable $X$ is a \bred{real-valued function} $X : \Omega \to \mathbb{R}$ such that for every $\omega \in \Omega$, $X(\omega) = x \in \mathbb{R}$. It is a mapping from the sample space to the real numbers.
+\end{definition}
+
+\begin{example}
+    Consider the random experiment of tossing a coin. 
+
+    \begin{itemize}
+        \item $\Omega = \{ H, T \}$
+        \item Let $X$ be the RV denoting the outcome of a toss. We ca define $X$ such that $X(H) = 1$, $X(T) = 0$ essentially converting each outcome into a number. 
+        \item By convention, we will denote random variables with capital letters, and a particular (unknown value) of a random variable with its lower case equivalent. i.e. for a random variable $X$, a particular value of this RV would be denoted by $x$.
+    \end{itemize}
+\end{example}
+
+\begin{definition}[Discrete Random Variable]\index{Discrete Random Variable}\index{Continuous Random Variable}
+    A \term{discrete} of a random variable $X$ is one tha can take on only a finite number of a countably infinite number of possible values $x$. A random variable $X$ is \term{continuous} if its domain is an interval of real numbers. 
+\end{definition}
+
+\begin{definition}[Probability Mass Function]\index{Probability Mass Function}
+    A \term{probability mass function} (PMF) of a discrete random variable is one that assigns a probability to each value $x \in C$ such that 
+    \begin{itemize}
+        \item $0 \le P(X = x) \le 1$
+        \item $\sum_{x \in X} P(X = x) = 1$
+    \end{itemize}
+\end{definition}
+
+\begin{example} 
+    Below are some examples of random variables. 
+
+    \textbf{Discrete RV Examples}
+    
+    \begin{itemize}
+        \item The number of defects in a day's production of car parts 
+        \item The number of new arrivals in a queue 
+        \item The status of your internet service: online or offline 
+        \item The number of students online at a particular time
+    \end{itemize}
+
+    \textbf{Continuous RV Examples}
+
+    \begin{itemize}
+        \item The weight of a randomly selected individual 
+        \item The time it takes to load a video 
+        \item The temperature in the morning of a random day
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    Determine the value of $k$ such that $f(x) = \frac{kx^2 - x + 2}{4}$ will be a valid probability mass function for $X = \{ 0, 1, 2, 3, 4 \}$. 
+
+    \begin{center}
+        \begin{tabular}{c | c c c c c}
+            $X$ & 0 & 1 & 2 & 3 & 4 \\
+            \hline
+            $P(X = x)$ & $\frac{2}{4}$ & $\frac{k+1}{4}$ & $\frac{4k}{4}$ & $\frac{9k-1}{4}$ & $\frac{16k-2}{4}$
+        \end{tabular}
+    \end{center}
+\end{example}
+
+%TODO
+PAGE 6 WEEK 4
+%TODO
+
 \section{Cumulative Distribution Function}
 
 The probability behaviour of a random variable can be represented in many ways, such as with the probability mass function. Another representation is with the \term{cumulative distribution function}.
@@ -110,5 +173,5 @@ Often, we are interested in modeling the number of successes among multiple tria
 \begin{definition}[Binomial Distribution]\index{Binomial Distribution}
     A \term{Binomial experiment} consists of $n$ independent and identical Bernoulli trials. The probability of success, $p$, is fixed for each trial. 
 
-    Let $X$ be the random variable representing the number of successes among the $n$ trials. Then $X$ can be modeled by the binomial distribution with parameters $n$ and $p$, denoted as $X \sim \mathrm{Bin}(n, p)$. The binomial distribution has probability mass function: $$O(X = x) = {n \choose x} \cdot p^x \cdot (1 - p)^{n - x}$$ If $X \sim \mathrm{Bin}(n, p)$, we can show that $E(X) = np$ and $V(X) = np(1 - p)$
+    Let $X$ be the random variable representing the number of successes among the $n$ trials. Then $X$ can be modeled by the binomial distribution with parameters $n$ and $p$, denoted as $X \sim \mathrm{Bin}(n, p)$. The binomial distribution has probability mass function: $$O(X = x) = \binom{n}{x} \cdot p^x \cdot (1 - p)^{n - x}$$ If $X \sim \mathrm{Bin}(n, p)$, we can show that $E(X) = np$ and $V(X) = np(1 - p)$
 \end{definition}
