@@ -58,12 +58,17 @@
 \definecolor{darkGreen}{rgb}{0.31, 0.54, 0.30}
 
 %----------------------------------------------------------------------------------------
-%	TEST STYLES
+%	TEXT STYLES
 %----------------------------------------------------------------------------------------
 
 \DeclareTextFontCommand{\term}{\color{orange}\itshape}
 \DeclareTextFontCommand{\bred}{\color{red}\bfseries}
 \DeclareTextFontCommand{\itblue}{\color{lightBlue}\itshape}
+
+%----------------------------------------------------------------------------------------
+%	MATH STYLES
+%----------------------------------------------------------------------------------------
+\everymath{\displaystyle}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -259,6 +264,7 @@
 \newtheorem{corollaryT}[dummy]{Corollary}
 \theoremstyle{ocrenum}
 \newtheorem{proposition}[dummy]{Proposition}
+\newtheorem{axiom}[dummy]{axiom}
 
 %----------------------------------------------------------------------------------------
 %	DEFINITION OF COLORED BOXES
