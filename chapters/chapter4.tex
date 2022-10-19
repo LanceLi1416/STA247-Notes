@@ -50,20 +50,56 @@
 \end{example}
 
 \begin{example}
-    Determine the value of $k$ such that $f(x) = \frac{kx^2 - x + 2}{4}$ will be a valid probability mass function for $X = \{ 0, 1, 2, 3, 4 \}$. 
+    Determine the value of $k$ such that $f(x) = \frac{kx^2 - x + 2}{4}$ will be a valid probability mass function for $X = \{ 0, 1, 2, 3, 4 \}$.
 
     \begin{center}
         \begin{tabular}{c | c c c c c}
-            $X$ & 0 & 1 & 2 & 3 & 4 \\
+            $X$        & 0             & 1               & 2              & 3                & 4                 \\
             \hline
             $P(X = x)$ & $\frac{2}{4}$ & $\frac{k+1}{4}$ & $\frac{4k}{4}$ & $\frac{9k-1}{4}$ & $\frac{16k-2}{4}$
         \end{tabular}
     \end{center}
+
+    We need $\sum_{x=0}^4 P(X = x) = 1$. That is, 
+    $\begin{aligned}[t]
+        \frac{2 + (k+1) + (4k) + (9k-1) + (16k-2)}{4} & = 1            \\
+        30k                                           & = 4            \\
+        k                                             & = \frac{2}{15}
+    \end{aligned}$
+
+    Thus, $k$ must be $\frac{2}{15}$ for $\sum_{x \in X} P(X = x) = 1$. 
+
+    \begin{center}
+        \begin{tabular}{c | c c c c c}
+            $X$        & 0             & 1               & 2              & 3              & 4              \\
+            \hline
+            $P(X = x)$ & $\frac{1}{2}$ & $\frac{17}{60}$ & $\frac{2}{15}$ & $\frac{1}{20}$ & $\frac{1}{30}$
+        \end{tabular}
+    \end{center}
 \end{example}
 
-%TODO
-PAGE 6 WEEK 4
-%TODO
+\begin{example}
+    A factory producing computer parts sends out a shipment of $10$ parts of which $3$ are defective. Find the probability mass function for the number of defectives a customer will get if the first customer randomly purchases $4$ computer parts.
+
+    Let $D =$ number of defectives purchased. 
+
+    $D = \{ 0, 1, 2, 3 \}$. 
+
+    \begin{itemize}
+        \item $P(D = 0) = \frac{_7C_4}{_{10}C_4}$
+        \item $P(D = 1) = \frac{_3C_1 \times _7C_3}{_{10}C_4}$
+        \item $P(D = 1) = \frac{_3C_2 \times _7C_2}{_{10}C_4}$
+        \item $P(D = 1) = \frac{_3C_3 \times _7C_1}{_{10}C_4}$
+    \end{itemize}
+
+    We may conclude that $P(D = d) = \frac{_3C_d \times _7C_{4-d}}{_{10}C_4}$. 
+\end{example}
+
+\begin{example}
+    A quiz consists of $10$ true/false problems. A student takes the quiz by randomly selecting the answers. Examine the graph of the probability mass function and describe the behaviour of the random number of correct answers X.
+
+    %TODO Week 4 Page 8
+\end{example}
 
 \section{Cumulative Distribution Function}
 
