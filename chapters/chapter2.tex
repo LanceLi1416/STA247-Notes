@@ -1,1 +1,71 @@
 \chapter{Counting}
+
+\section{Counting and Probability}
+
+\begin{proposition}[Probability as Relative Frequency]
+    The long-run relative frequency of an event $A$ will approach the probability of event $A$. In cases where the sample space consists of \bred{equally likely} elements, we can find this probability by calculating the relative frequency of $A$ in $\Omega$ by $$P(A) = \frac{\text{Number of outcomes in } A}{\text{Total number of possible outcomes in the random experiment}} = \frac{n(A)}{n(\Omega)}$$
+    This is valid \bred{only if} each element in $\Omega$ is \bred{equally likely}. 
+\end{proposition}
+
+\section{Fundamental Principle of Counting}
+
+Experiments that involve equally likely discrete outcomes make calculating probabilities much easier when we have methods to count outcomes.
+
+\begin{itemize}
+    \item For an experiment with two events of interest, $A$ and $B$, you can use the Inclusion-Exclusion Principle to count the number of outcomes in event $A \cup B$: $n(A \cup B) = n(A) + n(B) - n(A \cap B)$, where $n(X)$ denotes the number of elements in event $X$. 
+
+    \item For experiments that involve \itblue{multiple \bred{ordered}} stages, we can use the \bred{Fundamental Principle of Counting} (FPC) to count the number of unique outcomes from this multi-stage experiment. 
+\end{itemize}
+
+\begin{example}[Toy Example]
+    A new sandwich shop seems to only have limited customization options. They offer three types of greens (lettuce, spinach, mixed greens), five types of deli meat, and four types of cheese. Sandwiches are built by layering with greens, followed by deli meat, and topping it off with cheese. How many unique sandwiches can be created if a customer randomly chooses one of each item to include in their sandwich?
+
+    This experiment involves $3$ ordered stages:
+    \begin{itemize}
+        \item Stage 1: Pick a green - $3$ choices
+        \item Stage 2: Pick a deli meat - $5$ choices
+        \item Stage 3: Pick a cheese - $4$ choices
+    \end{itemize}
+
+    Each option is equally likely to be chosen since we're considering all possible combinations
+
+    There are in total $3 \times 5 \times 4 = 60$ unique combinations. 
+\end{example}
+
+When counting the number of (ordered) outcomes from a multistage experiment, we can use the Fundamental Principle of Counting.
+
+\begin{theorem}
+    If an experiment consists of $m$ (\bred{ordered}) stages with $n_1$ possible outcomes in stage 1, $n_2$ possible outcomes in stage 2, $\dots$, $n_m$ possible outcomes in stage $m$, then the total number of possible outcomes is $$\prod_{i=1}^m n_i$$
+\end{theorem}
+
+\section{Permutation}
+
+\begin{example}
+    FPC counts specifically \bred{ordered stages}. In the toy example, the number of sandwiches only include those that are layered in a specific order: with greens on the bottom, then deli meat, then cheese on top. However, customers might have a preference for how the ingredients are layered. 
+
+    \begin{enumerate}[label=\alph*)]
+        \item How many different ways can the ingredients (greens, deli meat, cheese) be layered/permuted?
+
+        \begin{itemize}
+            \item Stage 1: 3 choices
+            \item Stage 2: 2 choices
+            \item Stage 3: 1 choice
+        \end{itemize}
+
+        There are in total $3 \times 2 \times 1 = 6$ ways. 
+
+        \item If the choice and order of ingredients each result in a `different' sandwich, how many sandwich choices are there?
+        
+        $6$ choices to order ingredients $\times 60$ ingredient combinations $= 360$ `different' sandwiches. 
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Permutation - $_nP_n$]
+    The number of ways to order $n$ \bred{distinct} item is $$n! = n \times (n - 1) \times \cdots \times 2 \times 1$$
+\end{definition}
+
+\begin{definition}[Permutation - $_nP_k$]\index{Permutation}
+    The number of ways to select \itblue{ordered subset} of $k$ elements from a group of $n$ \bred{distinct} items is $$_nP_k = \frac{n!}{(n-k)!}$$
+\end{definition}
+
+The intuition behind this formula is to count all possible arrangements ($n!$) and group together all arrangements that have the same objects in the first $k$ stages. The resulting number of `groups' is the number of unique ordered subset. The number of elements in each group is equivalent to the number of ways to arrange the remaining $(n - k)$ objects. 

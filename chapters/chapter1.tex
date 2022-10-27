@@ -277,6 +277,90 @@ Using the definition of probability, as well as the event relations learned last
 
     \begin{enumerate}[label=\alph*)]
         \item The student can roll his or her tongue.
-        \item  The student can neither roll his or her tongue nor has attached earlobes.
+
+        $\begin{aligned}[t]
+            n(T) & = n(\Omega) - n(T^c) \\
+                 & = 50 - 23            \\
+                 & = 27
+        \end{aligned}$
+
+        \item The student can neither roll his or her tongue nor has attached earlobes.
+
+        $\begin{aligned}[t]
+            n\left( (T \cup E)^c \right) & = n(\Omega) - n(T \cup E)                 \\
+                                         & = n(\Omega) - (n(T) + n(E) - n(T \cap E)) \\
+                                         & = 50 - (27 + 15 - 10)                     \\
+                                         & = 18
+        \end{aligned}$
+    \end{enumerate}
+\end{example}
+
+In general, for the set of events $\{ A_1, A_2, \dots, A_n \}$, we have the \bred{Includion-Exclusion Principle}
+
+\begin{theorem}[Includion-Exclusion Principle]
+    $$\begin{aligned}[t]
+        P\left( \bigcup_{i=2}^n A_i \right) & = \sum_{r=1}^n \left( (-1)^{r+1} \sum_{i_1 < i_2 < \cdots < i_r} P(A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_r}) \right)\\ 
+        & = \sum_{i=1}^n P(A_i) - \sum_{i < j} P(A_i \cap A_j) + \cdots + (-1)^{r+1} \sum_{i_1 < i_2 < \cdots < i_r} P(A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_r}) + \cdots \\ & \qquad + (-1)^{n+1} P(A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_n})
+    \end{aligned}$$
+\end{theorem}
+
+If the set of events $\{ A_1, A_2, \dots, A_n \}$ are \bred{disjoint}, then the probability of the union is simply the sum of the probabilities of each set. 
+
+\begin{example}
+    For three events $A_1$, $A_2$, and $A_3$, $$\begin{aligned}[t]
+        P(A_1 \cup A_2 \cup A_3) & = \sum_{r=1}^n \left( (-1)^{r+1} \sum_{i_1 < i_2 < \cdots < i_r} P(A_{i_1} \cap A_{i_2} \cap \cdots \cap A_{i_r}) \right) \\
+        & = (-1)^{1+1} \left( P(A_1) + P(A_2) + P(A_3) \right) + \\ & \qquad (-1)^{2+1} \left( P(A_1 \cap A_2) + P(A_2 \cap A_3) + P(A_3 \cap A_1) \right) + (-1)^{3+1} P(A_1 \cap A_2 \cap A_3) \\
+        & = P(A_1) + P(A_2) + P(A_3) - P(A_1 \cap A_2) - P(A_2 \cap A_3) - P(A_3 \cap A_1) ~+ \\ & \qquad P(A_1 \cap A_2 \cap A_3)
+    \end{aligned}$$
+\end{example}
+
+\begin{example}[MMSA ex. 15]
+    A consulting firm presently has bids out on three projects. Let $A_i = \{ \text{Award project } i \}$, for $i = 1, 2, 3$, and suppose that $P(A_1) = 0.22$, $P(A_2) = 0.25$, $P(A_3) = 0.28$, $P(A_1 \cup A_2) = 0.11$, $P(A_1 \cap A_3) = 0.05$, $P(A_2 \cap A_3) = 0.07$, and $P(A_1 \cap A_2 \cap A_3) = 0.01$. 
+
+    Express in words each of the following events, and compute the probability of each event.
+
+    \begin{enumerate}[label=\alph*)]
+        \item ${A_1}^C \cap {A_2}^C$
+        
+        Event where they get neither project 1 nor project 2. 
+
+        $\begin{aligned}[t]
+            P({A_1}^C \cap {A_2}^C) & = P((A_1 \cup A_2)^C)                     & \text{DeMorgan's Law} \\
+                                    & = 1 - P(A_1 \cup A_2)                                             \\
+                                    & = 1 - (A(A_1) + P(A_2) - P(A_1 \cap A_2))                         \\
+                                    & = 1 - (0.22 + 0.25 - 0.11)                                        \\
+                                    & = 0.64
+        \end{aligned}$
+
+        \item ${A_1}^C \cap {A_2}^C \cap A_3$ 
+        
+        Event where they only win project 3. 
+
+        ${A_1}^C \cap {A_2}^C \cap A_3 = (A_1 \cup A_2)^C \cap A_3$ by DeMorgan's Law. 
+
+        Note that $A_3 = ((A_1 \cup A_2)^C \cap A_3) \cup ((A_1 \cup A_2) \cap A_3)$.
+
+        By Axiom 3, $P(A_3) = P(((A_1 \cup A_2)^C \cap A_3)) + P(((A_1 \cup A_2) \cap A_3))$. 
+
+        That is, $\begin{aligned}[t]
+            P((A_1 \cup A_2)^C \cap A_3)
+             & = P(A_3) - P((A_1 \cup A_2) \cap A_3)                                     \\
+             & = P(A_3) - P((A_1 \cap A_3) \cup (A_2 \cap A_3))                          \\
+             & = P(A_3) - (P(A_1 \cap A_3) + P(A_2 \cap A_3) - P(A_1 \cap A_2 \cap A_3)) \\
+             & = 0.28 - (0.07 + 0.05 - 0.01)                                             \\
+             & = 0.17
+        \end{aligned}$
+
+        \item What event can be user to represent the outcome the firm is awarded at least two project? Find this probability. 
+
+        $(A_1 \cap A_2) \cup (A_2 \cap A_3) \cup (A_3 \cap A_1)$
+
+        Let $X = A_1 \cap A_2$, $Y = A_2 \cap A_3$ and $Z = A_3 \cap A_1$. 
+        
+        Then, by the inclusion-exclusion principle, we have $$\begin{aligned}[t]
+            P(X \cup Y \cup Z) & = P(X) + P(Y) + P(Z) - P(X \cap Y) - P(Y \cap Z) - P(Z \cap X) + P(X \cap Y \cap Z) \\
+                               & = 0.11 + 0.07 + 0.05 - 0.01 - 0.01 - 0.01 + 0.01                                    \\
+                               & = 0.21
+        \end{aligned}$$
     \end{enumerate}
 \end{example}
