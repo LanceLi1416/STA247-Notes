@@ -774,3 +774,149 @@ What does a Poisson distribution look like? Generally unimodal and right-skewed,
         $\therefore$ They are expected to earn within $(10121.48, 90918.52)$ with at least $75\%$ probability. 
     \end{enumerate}
 \end{example}
+
+\subsection{Geometric Distribution}
+
+The geometric distribution models the probability of observing some number of \bred{consecutive failed trials before a ``success''} is observed. The trials are
+independent and identical Bernoulli trials with fixed probability of success, $p$.
+
+\begin{definition}[Geometric Distribution]\index{Memoryless Property}
+    Let $X$ be the random variable representing the \itblue{number of failures before the \bred{first} success}. The probability, $p$, is fixed for each trial.
+    $$P(X = x) = (1 - p)^x \cdot p$$
+
+    A geometric distribution has expectation $E(X) = \frac{1 - p}{p}$ and variance $V(X) = \frac{1 - p}{p^2}$. 
+\end{definition}
+
+Note that $P(X \ge k) = q^k$, that is, if the number of trials is more than $k$, then the first $k$ trials must have all been failures. 
+
+\begin{example}
+    What is the probability you ask $3$ people \bred{before} you find someone born in December. You may assume that every month is equally likely to be a birth month.
+
+    $\left( \frac{11}{12} \right)^3 \cdot \left( \frac{1}{12} \right)$
+
+    How many people do you expect to have to ask before finding someone born in December? What is the expected total number of people surveyed?
+
+    Total people $=$ number of failures $+ 1$
+
+    $\begin{aligned}[t]
+        E(X + 1) & = E(X) + 1 \\
+                 & = \frac{1 - \frac{1}{12}}{\frac{1}{12}} + 1 \\
+                 & = 12
+    \end{aligned}$
+\end{example}
+
+\begin{definition}[Memoryless Property]\index{Memoryless Property}
+    The geometric distribution has one additional property. It is a \term{memoryless distribution}. Suppose you have observed $j$ consecutive failures. The probability that we will observe at least another $k$ failures given that the first $j$ must be failures is the probability of observing k failures. In other words: $$P(X > j + k ~|~ x \ge j) = P(X > k)$$
+\end{definition}
+
+\begin{example}[Memoryless Property]
+    The probability that a component will function for more than 5 years if it is already 2 years old is the same as the probability that it functions for more than 3 years (this is obviously unrealistic, but an example of memoryless property).
+\end{example}
+
+\begin{example}
+    What is the probability that it takes at least $8$ rolls of a fair die before you roll a 6, if you did not roll a 6 in the first $4$ rolls?
+
+    Let $D$ be the number of dice rolls before rolling a 6 \footnote{If $D = 1$, then we roll a $6$ on the second trial}. 
+
+    $\begin{aligned}[t]
+        P(D \ge 8 | D \ge 4) & = P(D \ge 8 - 4) \\
+                             & = \left( \frac{5}{6} \right)^4 \\
+                             & \approx 48.23 \%
+    \end{aligned}$
+\end{example}
+
+\subsection{Negative Binomial Distribution}
+
+Negative binomial random variables model the number of failed attempts before we observe a total of r successes.
+
+The random variable can model either the number of failures or the total number of trials. Note that the two are linear shifts of each other: $$n(\text{failure}) + (\text{`r' successes}) = n(\text{trials})$$ Since the last success is guaranteed in the last trial, we can reduce the problem to finding the probability of $(r - 1)$ successes in the first $(x + r - 1)$ trials. This type of random variable $X$ has a \{term{negative binomial distribution}.
+
+\begin{definition}[Negative Binomial Distribution]
+    Let $X$ be the number of failures before $r$\textsuperscript{th} success. Each trial is an independent and identical (i.i.d) Bernoulli trial with p probability of success. 
+    $$P(X = x) = \binom{x + r - 1}{r - 1} \cdot p^r \cdot (1 - p)^x$$
+
+    A negative binomial distribution has expectation $E(X) = \frac{r(1-p)}{p}$ and variance $V(X) = \frac{r(1-p)}{p^2}$. 
+
+    Note that if we model $Y$ to be the number of trials to achieve rth success, then we have a success in the $Y$\textsuperscript{th} trial, $Y - r$ failures and $r - 1$ successes among the first $Y - 1$ trials is $$P(Y = y) = \binom{y - 1}{r - 1} \cdot p^r \cdot (1 - p)^{y-r}$$
+\end{definition}
+
+\begin{example}[Negative Binomial Distribution]
+    Below are examples of Negative Binomial Distributions.
+
+    \begin{itemize}
+        \item The number of losing lotto numbers selected before you have 6 winning numbers 
+        \item The total numbers you have selected to achieve 6 winning numbers 
+        \item The number of tails before getting 4 heads in consecutive coin tosses 
+        \item The number of times you toss a coin to get 4 heads 
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    Find the probability that you will have to survey $Y = D_1 + D_2 + D_3 = 10$ people NOT born in December before you have a total of $3$ people born in December (i.e. that you survey a total of $10 + 3$ people to find a total of $3$ December babies).
+    $$\cmark \cmark \xmark \xmark \xmark \xmark \xmark \xmark \xmark \xmark \xmark \xmark | \cmark$$
+
+    In order for 10 non-December individuals to be surveyed before this is fulfilled, this tells you that then 13th person is born in December, while 2 of the first 12 people are born in December.
+
+    $\begin{aligned}[t]
+        P(\text{Survey } 10 \text{ failures before } 3 \text{ successes}) 
+         & = \binom{10 + 3 - 1}{3 - 1} \cdot \left( \frac{1}{2} \right)^3 \cdot \left( 1 - \frac{1}{12} \right)^{10} \\
+         & = \binom{12}{2} \cdot \left( \frac{1}{2} \right)^3 \cdot \left( \frac{11}{12} \right)^{10}                \\
+         & \approx 1.6 \%
+    \end{aligned}$
+\end{example}
+
+\subsection{Hypergeometric Distribution}
+
+A hypergeometric distribution can be used to calculate the probability of selecting $k$ ``successes'' out of $n$ selections \bred{when the pool of selection $N$ is small}. In other words, 
+
+\begin{itemize}
+    \item You have a population of size $N$ made up of subpopulations: ``successes'' and ``failures''. 
+    \item You are randomly selecting a group of $n$ from this population (without replacement) and observing the number of ``successes'' in your group of $n$. 
+    \item Example: Tagging wildlife to be tracked over several years to observe population growth, territory expansion, etc.
+\end{itemize}
+
+If the pool of selection $N$ is large relative to $n$, then the probability can be approximated using a binomial distribution.
+
+\begin{itemize}
+    \item Sampling without replacement, the probability of subsequent selections is not greatly impacted
+    \item We can model this with ``n'' trials, and $p = \frac{k}{N}$
+\end{itemize}
+
+\begin{example}
+    Consider the following example, where $N$ is big versus $N$ is small. 
+
+    \begin{itemize}
+        \item We have a lot of $5000$ items, $10\%$ of which are known to be defective. Find the probability of observing at least three defective items in a random selection of $10$ items.
+
+        Let $D$ be the number of deffectives. 
+
+        $D \sim Hypergeometric(5000, n = 10, k = 500)$
+
+        $\begin{aligned}[t]
+            P(D \ge 3) 
+             & = 1 - P(D \le 2) \\
+             & = 1 - \frac{\binom{4500}{10}}{\binom{5000}{10}} - \frac{\binom{500}{1} \cdot \binom{4500}{9}}{\binom{5000}{10}} - \frac{\binom{500}{2} \cdot \binom{4500}{8}}{\binom{5000}{10}} \\
+             & = 7.00 \%
+        \end{aligned}$
+
+        \item We have a lot of $50$ items, $10\%$ of which are known to be defective. Find the probability of observing at least three defective items in a random selection of 10 items.
+
+        Let $D$ be the number of deffectives. 
+
+        $D \sim Hypergeometric(50, n = 10, k = 5)$
+
+        $\begin{aligned}[t]
+            P(D \ge 3) 
+             & = 1 - P(D \le 2) \\
+             & = 1 - \frac{\binom{45}{10}}{\binom{50}{10}} - \frac{\binom{5}{1} \cdot \binom{45}{9}}{\binom{50}{10}} - \frac{\binom{5}{2} \cdot \binom{45}{8}}{\binom{50}{10}} \\
+             & \approx 4.83 \%
+        \end{aligned}$
+
+        \item Approximate probability ysing binomial distribution for both, since $D \sim Bin(n = 10, p = 0.10)$, $P(D \ge 3) = 1 - P(D \le 2) = 1 - \sum_{d=0}^{2} \binom{10}{d} \cdot 0.10^{d} \cdot (1 - 0.10)^{10-d} \approx 7.02\%$
+    \end{itemize}
+\end{example}
+
+\begin{definition}[Hypergeometric Distribution]
+    Suppose you have a pool of $N$ objects that can be partitioned into $2$ (or more groups) by some characteristic. Suppose there are $k$ objects of type $A$ and $N - k$ objects of type $B$. In a random sample of size $n$ (without replacement) from this pool of $N$ objects, let $X$ denote the random variable for the number of objects of type $A$ that is selected. $$P(X = x) = \frac{\binom{k}{x} \cdot \binom{N-k}{n-x}}{\binom{N}{n}}, max(0, n - (N-k)) \le x \le min(n, k)$$
+    $X$ has an expected value and variance $E(X) = n \cdot \frac{k}{N}$ and $V(X) = n \cdot \frac{k}{N} \left( 1 - \frac{k}{N} \right) \left( \frac{N - n}{N - 1} \right)$
+\end{definition}
