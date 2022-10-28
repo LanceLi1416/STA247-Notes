@@ -1,0 +1,111 @@
+\chapter{Continuous Random Variables}
+
+\section{Probability Density Function}
+
+Recall that a random variable is \bred{continuous} if it can take on values on an interval of real numbers. For example, 
+
+\begin{itemize}
+    \item The mass of a randomly selected salmon in kilograms 
+    \item The horizontal distance a figure skater travels on a specific type of jump in metres 
+    \item The random elapsed time between football plays in seconds
+\end{itemize}
+
+\begin{definition}[Probability Density Function]
+    The \term{probability density function} (PDF) of a continuous random variable $X$ is a function $f(x)$ that has the following properties.
+
+    \begin{enumerate}
+        \item $f(x) \ge 0$ for all $x$ in the support of $X$
+        \vspace{0.5em}
+        \item $\int_{-\infty}^{\infty} f(x) \,dx = 1$
+        \item $P(a \le X \le b) = \int_a^b f(x) \,dx$
+    \end{enumerate}
+\end{definition}
+
+Note that unlike in the discrete case, the density function $f(x) \neq P(X = x)$ for continuous RV $X$. Instead, $f(x)$ describes the probability \itblue{density} for various values of $x$ and the \bred{area under the probability density function} corresponds to the \bred{probability over the interval}.
+
+\begin{example}
+    Verify that $f(y) = 3(y - 1)^2$, $0 \le y \le 1$\footnote{This is called the \term{support}\index{Support (of RV)} of the random variable $Y$ -- the set of $y$ that has \bred{non-zero} probabilities. In other words, $f(y) = \begin{cases} 3(y - 1)^2 & 0 \le y \le 1 \\ 0 & \text{otherwise} \end{cases}$} is a valid probability density function. 
+
+    \begin{enumerate}
+        \item $3 > 0$ and $(y - 1)^2 \ge 0$. Thus, $f(y) = 3(y - 1)^2 \ge 0$. 
+        \item $\begin{aligned}[t]
+            \int_{-\infty}^\infty f(y) \,dy 
+             & = \int_{-\infty}^0 0 \,dy + \int_0^1 3(y - 1)^2 \,dy + \int_1^\infty 0 \,dy \\
+             & = 0 + (y - 1) \bigg|_0^1 \\
+             & = (1 - 1)^3 - (0 - 1)^3 \\
+             & = 1
+        \end{aligned}$
+    \end{enumerate}
+\end{example}
+
+\begin{example}[MMSA Ex. 4.30]
+    The response time $X$ in seconds at an online computer terminal, which is the elapsed time between the end of a user's inquiry and the beginning of the system's response, had a distribution given by the following probability density function $$f(x) = \begin{cases} \frac{1}{5}e^{-x/5} & x > 0 \\ 0 & \text{otherwise} \end{cases}$$
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[thick,->] (-0.2,0) -- (6.2,0) node[right] {$x$};
+            \draw[thick,->] (0,-0.2) -- (0,2.7) node[above] {$y$};
+
+            \draw[thick,lightBlue,domain=0:6,smooth] plot ({\x}, {exp(-\x) * 2}) node[above left] {$f(x)$};
+
+            \draw (0.2,2) -- (0,2) node[left] {$\frac{1}{5}$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{enumerate}[label=\alph*)]
+        \item What is the probability the response time will be more than $10$ seconds long if there was no response in the first $8$ seconds?
+
+        $\begin{aligned}[t]
+            P(X > 10 | x \ge 8) & = P(X > 2)                           \\ 
+                                & = \int_2^\infty \frac{1}{5} e^{-x/5} \\
+                                & = e^{-2/5}                           \\
+                                & \approx 67.03 \%
+        \end{aligned}$
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Expected Value]\index{Expected Value (Continuous RV)}
+    The \term{expected value} (sometimes called the \term{mean}) of a continuous random variable $X$ with probability density function $f(x)$ is given by $$E(X) = \int_{-\infty}^\infty x \cdot f(x) \,dx$$ 
+
+    For any real-valued function $g(X)$ of $X$, $$E(g(X)) = \int_{-\infty}^\infty g(x) f(x) \,dx$$
+\end{definition}
+
+\begin{definition}[Variance]\index{Variance (Continuous RV)}
+    The \term{varianc} of a continuous random variable $X$ with probability density function $f(x)$ is given by $$V(X) = E((X - \mu)^2) = \int_{-\infty}^\infty (x - \mu)^2 f(x) \,dx$$ 
+
+    As was shown in the discrete case, we have an alternative, often shorter way to compute variance: $$V(X) = E(X^2) - E(X)^2$$
+\end{definition}
+
+\begin{itemize}
+    \item The variance is the average \itblue{squared} deviation of $X$ from its mean.
+    \item The \term{standard deviation} of a random variable is the square root of the variance ($SD = \sqrt{V(X)}$).
+\end{itemize}
+
+\begin{example}
+    A gas station operates a pump that can pump up to $20,000$ gallons of gas a month. The total amount of gas that is pumped at a station in a month can be modelled with a random variable $G$ (measured in $10,000$ gallons) with PDF $$f(g) = \begin{cases} g & 0 < g < 1 \\ 2 - g & 1 \le g < 2 \\ 0 & \text{otherwise} \end{cases}$$
+
+    \begin{enumerate}[label=\alph*)]
+        \item Find the expected number of gallons of gas pumped per month.
+        
+        $\begin{aligned}[t]
+            E(F) & = \int_{-\infty}^\infty g \cdot f(g) \,dg \\
+            & = \int_0^1 g \cdot g \,dg + \int_1^2 g(2 - g) \,dg \\
+            & = \frac{1}{3} g^3 \bigg|_0^1 + \left( g^2 - \frac{1}{3}g^3 \right) \bigg|_1^2 \\
+            & = \frac{1}{3} + \left( \left( 4 - \frac{8}{3} \right) - \left( 1 - \frac{1}{3} \right) \right) \\
+            & = 3 - \frac{6}{3} \\
+            & = 1
+        \end{aligned}$
+
+        \item Find the variance in the number of gallons of gas pumped per month.
+        
+        $\begin{aligned}[t]
+            V(G) & = E((G - \mu)^2) \\
+                 & = E(G^2) - E(G)^2 \\
+        \end{aligned}$
+
+        Note that $\begin{aligned}[t]
+            E(G^2) & = \int_{-\infty}^\infty g^2 \cdot f(g) \,dg \\
+            & = \int_0^1 g^2 \cdot g \,dg + \int_1^2 g^2 (2 - g) \,dg
+        \end{aligned}$
+    \end{enumerate}
+\end{example}
