@@ -42,6 +42,7 @@ Note that unlike in the discrete case, the density function $f(x) \neq P(X = x)$
     The response time $X$ in seconds at an online computer terminal, which is the elapsed time between the end of a user's inquiry and the beginning of the system's response, had a distribution given by the following probability density function $$f(x) = \begin{cases} \frac{1}{5}e^{-x/5} & x > 0 \\ 0 & \text{otherwise} \end{cases}$$
 
     \begin{center}
+        \tikzsetnextfilename{c05s01-01}%
         \begin{tikzpicture}
             \draw[thick,->] (-0.2,0) -- (6.2,0) node[right] {$x$};
             \draw[thick,->] (0,-0.2) -- (0,2.7) node[above] {$y$};
@@ -58,7 +59,7 @@ Note that unlike in the discrete case, the density function $f(x) \neq P(X = x)$
         $\begin{aligned}[t]
             P(X > 10 | x \ge 8) & = P(X > 2)                           \\ 
                                 & = \int_2^\infty \frac{1}{5} e^{-x/5} \\
-                                & = e^{-2/5}                           \\
+                                & = e^{-\sfrac{2}{5}}                  \\
                                 & \approx 67.03 \%
         \end{aligned}$
     \end{enumerate}

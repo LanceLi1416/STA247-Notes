@@ -38,13 +38,13 @@ When counting the number of (ordered) outcomes from a multistage experiment, we 
     If an experiment consists of $m$ (\bred{ordered}) stages with $n_1$ possible outcomes in stage 1, $n_2$ possible outcomes in stage 2, $\dots$, $n_m$ possible outcomes in stage $m$, then the total number of possible outcomes is $$\prod_{i=1}^m n_i$$
 \end{theorem}
 
-\section{Permutation}
+\section{Permutations}
 
 \begin{example}
     FPC counts specifically \bred{ordered stages}. In the toy example, the number of sandwiches only include those that are layered in a specific order: with greens on the bottom, then deli meat, then cheese on top. However, customers might have a preference for how the ingredients are layered. 
 
     \begin{enumerate}[label=\alph*)]
-        \item How many different ways can the ingredients (greens, deli meat, cheese) be layered/permuted?
+        \item How many different ways can the ingredients (greens, deli meat, cheese) be layered / permuted?
 
         \begin{itemize}
             \item Stage 1: 3 choices
@@ -60,12 +60,247 @@ When counting the number of (ordered) outcomes from a multistage experiment, we 
     \end{enumerate}
 \end{example}
 
-\begin{definition}[Permutation - $_nP_n$]
+\begin{definition}[Permutations - ${}_nP_n$]
     The number of ways to order $n$ \bred{distinct} item is $$n! = n \times (n - 1) \times \cdots \times 2 \times 1$$
 \end{definition}
 
-\begin{definition}[Permutation - $_nP_k$]\index{Permutation}
-    The number of ways to select \itblue{ordered subset} of $k$ elements from a group of $n$ \bred{distinct} items is $$_nP_k = \frac{n!}{(n-k)!}$$
+\begin{definition}[Permutations - ${}_nP_k$]\index{Permutations}
+    The number of ways to select \itblue{ordered subset} of $k$ elements from a group of $n$ \bred{distinct} items is $${}_nP_k = \frac{n!}{(n-k)!}$$
 \end{definition}
 
 The intuition behind this formula is to count all possible arrangements ($n!$) and group together all arrangements that have the same objects in the first $k$ stages. The resulting number of `groups' is the number of unique ordered subset. The number of elements in each group is equivalent to the number of ways to arrange the remaining $(n - k)$ objects. 
+
+\begin{example}
+    Suppose you are selecting numbers for Lotto $649$. You must pick $6$ numbers between $1$ and $49$.
+
+    \begin{enumerate}[label=\alph*)]
+        \item How many possible winning numbers can be generated if the rules specify that each number can be selected more than once and sequence matters? 
+        
+        $\begin{aligned}[t]
+            n(\Omega) & = 49 \times 49 \times 49 \times 49 \times 49 \times 49 \\
+                      & = 49^6                                                 \\
+                      & = 13,841,287,201
+        \end{aligned}$
+
+        \item How many possible winning numbers can be generated if the rules specify that each number can only be selected once and sequence matters?
+        
+        $\begin{aligned}[t]
+            n(\Omega) & = _{49}P_6                                             \\
+                      & = \frac{49!}{(49-6)!}                                  \\
+                      & = 49 \times 48 \times 47 \times 46 \times 45 \times 44 \\
+                      & = 10,068,247,500
+        \end{aligned}$
+
+        \item You win the lottery jackpot if you match all six winning numbers. Under the rules of (b), how likely are you to win the lottery if the six winning numbers must appear in the correct order? In any order?
+        
+        \begin{itemize}
+            \item If only in correct order, $\begin{aligned}[t]
+                P(\text{win}) & = \frac{n(\text{win})}{n(\Omega)} \\
+                              & = \frac{1}{10,068,247,500}        \\
+                              & \approx 9.93 \times 10^{-9} \%
+            \end{aligned}$
+
+            \item In in any order, $\begin{aligned}[t]
+                P(\text{win}) & = \frac{n(\text{win})}{n(\Omega)} \\
+                              & = \frac{6!}{10,068,247,500}       \\
+                              & \approx 7.15 \times 10^{-6} \%
+            \end{aligned}$
+        \end{itemize}
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    A new student union made up of $5$ representatives with different roles is to be established in the next school year. There are $30$ candidates applying to become a representative. If each candidate is equally qualified and likely to be elected, how many different groups of representatives can be created?
+
+    $\begin{aligned}[t]
+        n(\text{student union}) & = {}_{30}P_5                                 \\
+                                & = \frac{30!}{(30-5)!}                        \\
+                                & = 30 \times 29 \times 28 \times 27 \times 26 \\
+                                & = 17,100,770
+    \end{aligned}$
+\end{example}
+
+\begin{example}
+    At a party there are $10$ guests. In how many ways can at least two guests have the same birthday? (Assume no leap year births, so 365 days of the year).
+
+    $\begin{aligned}[t]
+        P(\text{at least } 2) & = \frac{n(\text{at least } 2)}{n(\Omega)}                    \\
+                              & = \frac{n(\Omega) - n(\text{distinct birthdays})}{n(\Omega)} \\
+                              & = \frac{365^{10} - {}_{365}P_{10}}{365^{10}}                 \\
+                              & \approx 11.69 \%
+    \end{aligned}$
+\end{example}
+
+\begin{example}
+    An urn contains $4$ red balls, $1$ yellow ball, $3$ green balls, and $2$ blue balls. How many different ways can you arrange all $10$ of these balls?
+
+    \begin{itemize}
+        \item We are arranging \bred{all $10$} \itblue{non-distinct} balls. We can use the idea of ${}_nP_k$ to count the number of distinct orderings by taking into account the repeat coloured balls.
+
+        \item But there's a problem! consider 
+        
+        (R1) (R2) (Y1) (G1) (G2) (G3) (R3) (R4) (B1) (B2) is the same ordering as 
+
+        (R2) (R1) (Y1) (G3) (G2) (G1) (R3) (R4) (B1) (B2)
+
+        \item How might we adjust for these repeat orderings? 
+
+        We count the number of ways to rearrange identical balls. 
+
+        \begin{center}
+            \tikzsetnextfilename{c02s03-01}%
+            \begin{tikzpicture}
+                \draw[lightRed,fill=lightRed] (0,4) circle (0.5);
+                \draw[lightRed,fill=lightRed] (2,4) circle (0.5);
+                \draw[yellow,fill=yellow] (4,4) circle (0.5);
+                \draw[lightRed,fill=lightRed] (0,2) circle (0.5);
+                \draw[yellow,fill=yellow] (2,2) circle (0.5);
+                \draw[lightRed,fill=lightRed] (4,2) circle (0.5);
+                \draw[yellow,fill=yellow] (0,0) circle (0.5);
+                \draw[lightRed,fill=lightRed] (2,0) circle (0.5);
+                \draw[lightRed,fill=lightRed] (4,0) circle (0.5);
+                % ------------------------------------------------------ %
+                \draw[yellow,fill=yellow] (6,-0.33) circle (0.25);
+                \draw[lightRed,fill=lightRed] (6.75,-0.33) circle (0.25);
+                \draw[lightRed,fill=lightRed] (7.5,-0.33) circle (0.25);
+                \draw[yellow,fill=yellow] (6,0.33) circle (0.25);
+                \draw[lightRed,fill=lightRed] (6.75,0.33) circle (0.25);
+                \draw[lightRed,fill=lightRed] (7.5,0.33) circle (0.25);
+                %
+                \draw[lightRed,fill=lightRed] (6,1.67) circle (0.25);
+                \draw[yellow,fill=yellow] (6.75,1.67) circle (0.25);
+                \draw[lightRed,fill=lightRed] (7.5,1.67) circle (0.25);
+                \draw[lightRed,fill=lightRed] (6,2.33) circle (0.25);
+                \draw[yellow,fill=yellow] (6.75,2.33) circle (0.25);
+                \draw[lightRed,fill=lightRed] (7.5,2.33) circle (0.25);
+                %
+                \draw[lightRed,fill=lightRed] (6,3.67) circle (0.25);
+                \draw[lightRed,fill=lightRed] (6.75,3.67) circle (0.25);
+                \draw[yellow,fill=yellow] (7.5,3.67) circle (0.25);
+                \draw[lightRed,fill=lightRed] (6,4.33) circle (0.25);
+                \draw[lightRed,fill=lightRed] (6.75,4.33) circle (0.25);
+                \draw[yellow,fill=yellow] (7.5,4.33) circle (0.25);
+                % ------------------------------------------------------ %
+                \draw[lightRed,thick] (4.75,4.0) -- (5.5,4.25);
+                \draw[lightRed,thick] (4.75,4.0) -- (5.5,3.75);
+                %
+                \draw[lightRed,thick] (4.75,2.0) -- (5.5,2.25);
+                \draw[lightRed,thick] (4.75,2.0) -- (5.5,1.75);
+                %
+                \draw[lightRed,thick] (4.75,0.0) -- (5.5,0.25);
+                \draw[lightRed,thick] (4.75,0.0) -- (5.5,-0.25);
+                % ------------------------------------------------------ %
+                \node at(6.00,4.33) {$R_1$};
+                \node at(6.75,4.33) {$R_2$};
+                \node at(6.00,3.67) {$R_2$};
+                \node at(6.75,3.67) {$R_1$};
+                %
+                \node at(6.00,2.33) {$R_1$};
+                \node at(7.50,2.33) {$R_2$};
+                \node at(6.00,1.67) {$R_2$};
+                \node at(7.50,1.67) {$R_1$};
+                %
+                \node at(6.75,0.33) {$R_1$};
+                \node at(7.50,0.33) {$R_2$};
+                \node at(6.75,-0.33) {$R_2$};
+                \node at(7.50,-0.33) {$R_1$};
+                % ------------------------------------------------------ %
+                \draw [thick,decorate,decoration={brace,raise=5pt,amplitude=5pt}] (4.5,-0.5) --  (-0.5,-0.5);
+                \draw [thick,decorate,decoration={brace,raise=5pt,amplitude=5pt}] (7.75,4.58) --  (7.75,1.41);
+                % ------------------------------------------------------ %
+                \node[below] at (2,-1.0) {$3$ distinct permutations};
+                \node[right] at (8.25,3) {$2$ repeats};
+            \end{tikzpicture}
+        \end{center}
+
+        The red balls have $2$ repeats, so there are $2!$ ways to rearrange the identical red balls. This gives a total of $\frac{3!}{2!} = 3$ ways to arrange the three balls. 
+    \end{itemize}
+\end{example}
+
+\section{Combinations}
+
+\begin{definition}[Combinations - ${}_nC_k$]\index{Combinations}
+    The number of ways to select an \itblue{unordered} subset of $k$ items from a group of $n$ \bred{distinct} items without replacement is $$\binom{n}{k} = {}_nC_k = \frac{n!}{(n - k)! \cdot k!}$$
+\end{definition}
+
+Similar to the intuition for permutations, we divide by $(n - k)!$ to remove all the different ways of ordering the remaining $(n - k)$ items. However, for every ${}_nP_k$ ordering of distinct objects, there exists $k!$ orderings of the same collection of $k$ objects. Thus, divide $k!$ to get the number of unique groupings of $k$ objects.
+
+\begin{example}
+    A new student union made up of $5$ representatives with equal roles is to be established in the next school year. There are $30$ candidates applying to become a representative. $20$ of the candidates are senior students, while $10$ are junior students. If each candidate is equally qualified and likely to be elected, how many different student unions can be formed? How likely is it that the union comprises of all senior candidates?
+
+    We are selecting $5$ students where order is irrelevant, so $\begin{aligned}[t]
+        n(\text{student union}) & = {}_{30}C_5                     \\
+                                & = \frac{30!}{(30 - 5)! \cdot 5!} \\
+                                & = 142,510
+    \end{aligned}$
+
+    The possibility that all the candidates are seniors, $\begin{aligned}[t]
+        P(\text{all seniors}) & = \frac{n(\text{all seniors})}{n(\Omega)} \\
+                              & = \frac{{}_{20}C_5}{{}_{30}C_5}           \\
+                              & = \frac{15,504}{142,506}                  \\
+                              & \approx 10..88 \%
+    \end{aligned}$
+\end{example}
+
+\begin{example}
+    Consider a standard deck of $52$ cards. 
+
+    \begin{enumerate}[label=\alph*)]
+        \item How many different hand of $5$ cards can be drawn from the $52$ cards? 
+        
+    Order is irrelevant, so $\begin{aligned}[t]
+        n(\text{hand of } 5) & = {}_{52}C_5                     \\
+                             & = \frac{52!}{(52 - 5)! \cdot 5!} \\
+                             & = 2,598,960
+    \end{aligned}$
+
+    \item How many different hands will have $4$ face cards and $1$ numeric card?
+    
+    \begin{itemize}
+        \item Stage 1: choose $4$ from the $12$ face cards, ${}_{12}C_4$
+        \item Stage 2: choose $1$ from the $36$ numeric cards, ${}_{36}C_1$
+    \end{itemize}
+
+    In total, by FPC, we have ${}_{12}C_4 \times {}_{36}C_1 = 17,820$ different hands. 
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    A two-pair in poker is a five card hand consisting of a two pairs of two distinct ranks, and a single card of third rank. Recall that a standard deck of $52$ card has 13 ranks: A, 2, 3, $\dots$, 10, Jack, Queen, King. Each rank comes in four suits: $\clubsuit, \spadesuit, \diamondsuit, \heartsuit$. An example of a two-pair hand is $9 \clubsuit ~ 9 \heartsuit ~ 8 \spadesuit ~ 2 \diamondsuit ~ 2 \clubsuit$. How many distinct two pair poker hands are there? 
+
+    \begin{itemize}
+        \item Pick two ranks, ${}_{13}C_2$
+        \item Pick two suits for each of the ranks, ${}_4C_2$ each
+        \item Pick the last card, ${}_{44}C_1$
+    \end{itemize}
+
+    In total, by FPC, we have ${}_{13}C_2 \times \left( {}_4C_2 \right)^2 \times {}_{44}C_1 = 123,552$ two pair hands. 
+\end{example}
+
+\begin{example}
+    Simple comparison sort algorithms used to sort a list of integers do so by comparing two integers, checking which is larger, and swapping the elements according to size. For example in bubble sort, the algorithm iterates through a list of integers repeatedly, compares two consecutive integers at a time, swaps their positions if necessary. It repeats this until all integers are in order. Suppose we want to sort a list from least to greatest:
+
+    \begin{enumerate}[label=\alph*)]
+        \item You might have learned that the number of comparisons in required in the worst case will grow proportionally to $n \log_{10}(n)$ as the number of inputs $n$ increases. For a given list of 8 distinct integers, what would the worst case sorting outcome look like?
+
+        There are $8! = 40,320$ ways for $8$ integers to be arranged. 
+
+        \begin{itemize}
+            \item In worst case, each time we compare $2$ inputs, we are left with many permutations to sort through
+            \item We are left with some permutations that has the most number of comparisons remaining. 
+        \end{itemize}
+
+        \item Of the number of possibilities in a), only one results in the desired sorted list. In the worst case, how many comparisons do we need at least to sort $n$ elements?
+
+        Let $C$ be the maximum number of comparisons to sort the worst case. 
+
+        $C$ is the height of the decision tree, where each node have two branches (for $x < y$): Yes or No. 
+
+        That is, $\begin{aligned}[t]
+            2^c          & \ge n!          \\
+            2^c          & \ge 8!          \\
+            \log_2 (2^c) & \ge \log_2 (8!) \\
+            C \ge \log_2 (8!) \approx 15.29
+        \end{aligned}$
+    \end{enumerate}
+\end{example}

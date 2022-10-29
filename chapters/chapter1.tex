@@ -19,7 +19,7 @@
 \end{example}
 
 \begin{definition}[Sample Space]\index{Sample Space}
-    The \term{sample space} is the set of all possible outcomes/results from a random experiment, usually denoted by $\Omega$ or $S$. The elements in the sample space are determined by the outcome of interest. Elements and are often denoted by $\omega$.
+    The \term{sample space} is the set of all possible outcomes / results from a random experiment, usually denoted by $\Omega$ or $S$. The elements in the sample space are determined by the outcome of interest. Elements and are often denoted by $\omega$.
 \end{definition}
 
 \begin{example}[Sample Space]
@@ -123,18 +123,19 @@ subsection{Event Relations}
 In the following Venn Diagram, $A$ and $B$ would be disjoint.
 
 \begin{center}
+    \tikzsetnextfilename{c01s01-01}%
     \begin{tikzpicture}
         \node[above] at (2, 1) {$\Omega$};
-        \draw[thick] (-2,1) -- (2,1) -- (2,-1) -- (-2,-1) -- cycle;
+        \draw (-2,1) -- (2,1) -- (2,-1) -- (-2,-1) -- cycle;
 
-        \draw[thick] (-0.75,0) circle (0.5);
+        \draw (-0.75,0) circle (0.5);
         \node[above] at (-0.75, 0.5) {$A$};
-        \draw[thick] (0.75,0) circle (0.5);
+        \draw (0.75,0) circle (0.5);
         \node[above] at (0.75, 0.5) {$B$};
     \end{tikzpicture}
 \end{center}
 
-\begin{definition}[Independent]\index{Independent}
+\begin{definition}[Independent]\index{Independent Events}
     Two events $A$ and $B$ are \term{independent} if the occurrence of one event does not alter the probability of occurrence of the other in any way. 
 \end{definition}
 
@@ -142,21 +143,21 @@ In the following Venn Diagram, $A$ and $B$ would be disjoint.
     Classify the following paris of events / variables as mutually exclusive, independent, or dependent. 
 
     \begin{enumerate}[label=\alph*)]
-        \item A student surveyed at random: $A = \{ \text{Studies CS} \}$, $B = \{ \text{Studies Stats} \}$
+        \item A student surveyed at random: \\ $A = \{ \text{Studies CS} \}$, $B = \{ \text{Studies Stats} \}$
 
-        Dependent. 
+        They are \textbf{dependent}. 
 
-        \item A biased coin ($80\%$ Head) is tossed twice: $C = \{ \text{Head on first toss} \}$ and $D = \{ \text{Tail on second toss} \}$
+        \item A biased coin ($80\%$ Head) is tossed twice: \\ $C = \{ \text{Head on first toss} \}$ and $D = \{ \text{Tail on second toss} \}$
 
-        Independent. 
+        They are \textbf{independent}. 
 
-        \item An individual surveyed at random: $E = \{ \text{Dislikes hiking} \}$ and $F = \{ \text{Likes or indifferent to hiking} \}$
+        \item An individual surveyed at random: \\ $E = \{ \text{Dislikes hiking} \}$ and $F = \{ \text{Likes or indifferent to hiking} \}$
 
-        Mutually Exclusive. 
+        They are \textbf{mutually exclusive}. 
 
-        \item A playing card is drawn: $G = \{ \text{Card is red} \}$ and $H = \{ \text{Card is Queen of Hearts} \}$
+        \item A playing card is drawn: \\ $G = \{ \text{Card is red} \}$ and $H = \{ \text{Card is Queen of Hearts} \}$
 
-        Dependent. 
+        They are \textbf{dependent}. 
     \end{enumerate}
 \end{example}
 

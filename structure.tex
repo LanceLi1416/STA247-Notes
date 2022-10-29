@@ -27,6 +27,9 @@
 \usepackage{lipsum} % Inserts dummy text
 
 \usepackage{tikz} % Required for drawing custom shapes
+\usetikzlibrary{calligraphy,decorations.pathreplacing,external}
+\tikzexternalize[prefix=figures/]
+\tikzset{external/only named=true}
 
 \usepackage[english]{babel} % English language/hyphenation
 
@@ -37,6 +40,12 @@
 
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
+
+\usepackage{cancel} % Use of cancelling
+
+\usepackage{xfrac} % For text-styled fractions
+
+\usepackage[export]{adjustbox} % For figure alignment
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -50,8 +59,6 @@
 \newcommand{\cmark}{\text{\ding{51}}}
 \newcommand{\xmark}{\text{\ding{55}}}
 
-\usepackage{cancel} % Use of cancelling
-
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
@@ -61,6 +68,7 @@
 %----------------------------------------------------------------------------------------
 
 \definecolor{lightBlue}{rgb}{0.0, 0.64, 1.0}
+\definecolor{lightRed}{rgb}{1.0, 0.50, 0.50}
 \definecolor{darkGreen}{rgb}{0.31, 0.54, 0.30}
 
 %----------------------------------------------------------------------------------------
