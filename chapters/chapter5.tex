@@ -110,3 +110,135 @@ Note that unlike in the discrete case, the density function $f(x) \neq P(X = x)$
         \end{aligned}$
     \end{enumerate}
 \end{example}
+
+\section{Common Continuous Distributions}
+
+\subsection{Uniform Distribution}
+
+The previous example uses a common continuous distribution called the `\term{Uniform Distribution}'. A distribution with constant density tells us that any intervals of the same width in the support have equal probability of occurrence. Such distributions are called \bred{uniform}.
+
+\begin{definition}[Uniform Distribution]\index{Uniform Distribution}
+    A continuous random variable $X$ follows a \term{uniform distribution} on the interval $a \le X \le b$ if it has probability density function $$f(x) = \begin{cases} \frac{1}{b - a} & a \le x \le b \\ 0 & \text{otherwise} \end{cases}$$ 
+    
+    A uniform distribution has mean and variance defined by its endpoints $$E(X) = \frac{b + a}{2} \qquad \qquad V(X) = \frac{(b - a)^2}{12}$$
+\end{definition}
+
+\subsection{Cumulative Distribution Function}
+
+\begin{definition}[Cumulative Distribution Function]\index{Cumulative Distribution Function}
+    The \term{cumulative distribution function} (CDF) of a continuous random variable $X$ is the function $F(x)$ that returns the cumulative probability of a random variable $X$ for any value $x \in \mathbb{R}$ $$F(x) = P(X \le x)$$
+
+    The function $F(x)$ can be explicitly found by finding an expression for $\int_{-\infty}^x f(w)$
+
+    The derivative of the CDF $F'(x)$ is the PDF of $X$: $F'(x) = F(x)$
+\end{definition}
+
+\begin{proposition}[Properties of CDF]
+    Below are some properties of CDF. 
+
+    \begin{itemize}
+        \item $P(X = c) = \int_c^c f(x)\,dx = 0 \implies P(X \le c) = P(X < c)$
+        \item $P(a \le X \le b) = \int_a^b f(x) \,dx = F(b) - F(a)$
+        \item $\lim_{x\to\infty} F(x) = 1$ and $\lim_{x\to-\infty} F(x) = 0$
+    \end{itemize}
+\end{proposition}
+
+\begin{example}
+    The distribution function of a random variable $X$ is as follows: $$F(x) = \begin{cases} 0 & x < 0 \\ \frac{x^3}{2} & 0 \le x < 1 \\ \frac{x}{2} & 1 \le x \le 2 \\ 1 & x > 2 \end{cases}$$ Find $P(0.5 \le X \le 1.5)$.
+
+    %TODO: refer to lec slides
+\end{example}
+
+\begin{example}
+    For a random variable $Y$ with probability density function $f(y) = 3(y - 1)^2$, $0 \le y \le 1$
+
+    \begin{enumerate}[label=\alph*)]
+        \item Sketch the PDF.
+
+        \begin{center}
+            \begin{tikzpicture}
+                %\draw[domain=0:1] plot ();
+            \end{tikzpicture}
+        \end{center}
+        
+        %TODO: draw it
+        
+        \item Find the cumulative distribution function of $Y$.
+        
+        CDF of $Y$: $P(Y \le y)$
+
+        For $y \in [0, 1)$, $\begin{aligned}[t]
+            P(Y \le y) & = \int_0^y 3(u - 1)^2 \,du \\
+                       & = (u - 1)^3 \bigg|_0^y \\
+                       & = (y - 1)^2 - (0 - 1)^3 \\
+                       & = 1 + (y - 1)^3
+        \end{aligned}$
+
+        Thus, we have $F_Y(y) = \begin{cases} 0 & y < 0 \\ 1 + (y - 1)^3 & 0 \le y < 1 \\ 1 & y \ge 1 \end{cases}$
+
+        %TODO: see slides
+    \end{enumerate}
+\end{example}
+
+% TODO: exponential distribution (see slides)
+
+\begin{example}
+    Previously, we modeled the number of shiba arrivals at the dog park over a day by a Poisson distribution. Suppose on average there are $5$ Shiba arrivals per day.
+
+    \begin{enumerate}[label=\alph*)]
+        \item A Shiba just arrived at the dog park. What is the probability that you'll another one will arrive in the next day (full 24 hours)?
+        
+        Let $T$ be the number of days until the next Shiba arrival. 
+
+        $\begin{aligned}[t]
+            R(T \le 1) & = F_t(1)                                               \\
+                       & = \int_0^1 \frac{1}{\theta} e^{-\frac{t}{\theta}} \,dt \\
+                       & = 1 - e^{-\frac{1}{\theta}}                            \\
+                       & = 1 - e^{-5}                                           \\
+                       & \approx 0.9933
+        \end{aligned}$
+
+        \item It's been 3 days since you've last seen your a Shiba at the dog park. What's the probability you'll have to wait at least five days before another Shiba arrives at the park?
+        
+        $\begin{aligned}[t]
+            P(T \ge 5 | T \ge 3) & = \frac{P(T \ge 5 \land T \ge 3)}{T \ge 3} \\
+                                 & = \frac{P(T \ge 5)}{P(T \ge 3)}
+        \end{aligned}$
+    \end{enumerate}
+\end{example}
+
+\subsection{Gamma Distribution}
+
+We have learned that the exponential distribution models the random interval until the \bred{next} Poisson arrival (or in other words, the random interval between two consecutive arrivals). Can it also be used to model the total interval between any two Poisson arrivals?
+
+What would the distribution of total time between the second and sixth shiba arrival look like? Will it also be exponential? What do you think?
+
+% TODO: see slides
+
+\section{Percentile}
+
+\begin{definition}[Percentile]\index{Percentile}
+    The $k$\textsuperscript{th} percentile is the value of a random variable for which $k\%$ of values are less than or equal to it. For a random variable $X$ with PDF $f(x)$, the $k$\textsuperscript{th} percentile $x_{k/100}$ is the value of $X$ at which $k\%$ of outcomes lie below it. That is, $$P(X \le x_{k/100}) = \frac{k}{100} \qquad OR \qquad x_{k/100} = F^{-1} \left( \frac{k}{100} \right)$$
+\end{definition}
+
+\textbf{Special Percentiles}
+
+\begin{itemize}
+    \item The \term{median} is also called the $50$\textsuperscript{th} percentile
+    \item The \term{first quartile} and \term{third quartile} are the $25$\textsuperscript{th} and $75$\textsuperscript{th} percentiles, respectively. 
+\end{itemize}
+
+\begin{example}
+    Find the median of a random variable $M$ with PDF $f(m) = 3m^2$, $0 \le m < 1$. 
+
+    Let $m_{0.5}$ be the median. 
+
+    $\begin{aligned}[t]
+        \int_{0}^{m_{0.5}} 3m^2 \,dm & = 0.5           \\
+        m^3 \bigg|_{0}^{m_{0.5}}     & = 0.5           \\
+        {m_{0.5}}^3                  & = 0.5           \\
+        m_{0.5}                      & = \sqrt[3]{0.5} \\
+                                     & \approx 0.79
+    \end{aligned}$
+\end{example}
+
