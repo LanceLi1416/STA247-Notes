@@ -146,7 +146,24 @@ The previous example uses a common continuous distribution called the `\term{Uni
 \begin{example}
     The distribution function of a random variable $X$ is as follows: $$F(x) = \begin{cases} 0 & x < 0 \\ \frac{x^3}{2} & 0 \le x < 1 \\ \frac{x}{2} & 1 \le x \le 2 \\ 1 & x > 2 \end{cases}$$ Find $P(0.5 \le X \le 1.5)$.
 
-    %TODO: refer to lec slides
+    \begin{center}
+        \tikzsetnextfilename{c05s02-01}%
+        \begin{tikzpicture}
+            \draw[thick,->] (-0.2,0) -- (8.2,0) node[right] {$x$};
+            \draw[thick,->] (0,-0.2) -- (0,2.7) node[above] {$f(x)$};
+
+            \draw[thick,lightBlue,domain=0:3,smooth] plot ({\x}, {(\x/3)^3});
+            \draw[thick,lightBlue,domain=3:6,smooth] plot ({\x}, {\x/3}) node[above] {$f(x)$};
+            \draw[thick,lightBlue] (6,2) -- (8,2);
+        \end{tikzpicture}
+    \end{center}
+
+    $\begin{aligned}[t]
+        P(0.5 \le X \le 1.5) & = P(X \le 1.5) - P(X < 0.5)       \\
+                             & = F(1.5) - F(0.5)                 \\
+                             & = \frac{1.5}{2} - \frac{0.5^3}{2} \\
+                             & \approx 68.75\%
+    \end{aligned}$
 \end{example}
 
 \begin{example}
@@ -156,12 +173,18 @@ The previous example uses a common continuous distribution called the `\term{Uni
         \item Sketch the PDF.
 
         \begin{center}
+            \tikzsetnextfilename{c05s02-02}%
             \begin{tikzpicture}
-                %\draw[domain=0:1] plot ();
+                \draw[thick,->] (-0.2,0) -- (1.7,0) node[right] {$y$};
+                \draw[thick,->] (0,-0.2) -- (0,3.2) node[above] {$f(y)$};
+
+                \draw[thick,lightBlue,domain=0:1,smooth] plot ({\x}, {3*(\x-1)^2});
+                \draw[lightBlue] (1,1) node[above] {$f(y)$};
+
+                \draw (0.25,3) -- (0,3) node[left] {$3$};
+                \draw (1,0.25) -- (1,0) node[below] {$1$};
             \end{tikzpicture}
         \end{center}
-        
-        %TODO: draw it
         
         \item Find the cumulative distribution function of $Y$.
         
@@ -176,17 +199,57 @@ The previous example uses a common continuous distribution called the `\term{Uni
 
         Thus, we have $F_Y(y) = \begin{cases} 0 & y < 0 \\ 1 + (y - 1)^3 & 0 \le y < 1 \\ 1 & y \ge 1 \end{cases}$
 
-        %TODO: see slides
+        \item Find $P(0.1 \le Y \le 0.4)$
+        
+        \begin{itemize}
+            \item PDF: Area under PDF from $0.1$ to $0.4$, $\int_{0.1}^{0.4} f(y) \,dy$
+            \item CDF: $\begin{aligned}[t]
+                P(0.1 \le Y \le 0.4) & = P(Y \le 0.4) - P(Y < 0.1) \\
+                                     & = F(0.4) - F(0.1)
+            \end{aligned}$
+        \end{itemize}
+
+        \item Find the probability that $Y = 0.6$.
+        $$0$$
     \end{enumerate}
 \end{example}
 
+\subsection{Exponential Distribution}
+
 % TODO: exponential distribution (see slides)
+
+\begin{definition}[Exponential Distribution]\index{Exponential Distribution}
+    A continuous random variable $X$ is \term{exponentially distributed} with mean parameter $\theta > 0$ (OR rate of $\lambda > 0$) if it has the probability density function $$f(x) = \begin{cases} \frac{1}{\theta} e^{-\frac{x}{\theta}} \text{ OR } \lambda e^{-\lambda x} & x \ge 0 \\ 0 & \text{otherwise} \end{cases}$$
+
+    $X$ has mean and variance $$E(X) = \theta \text{ OR } \frac{1}{\lambda} \qquad \qquad B(X) = \theta^2 \text{ OR } \frac{1}{\lambda^2}$$
+
+    We say $X \sim Exp(\theta)$ or $X \sim Exp(\lambda)$ to define the distribution. 
+\end{definition}
+
+\begin{definition}
+    Given an exponential random variable $X$ with parameter $\theta$, derive the cumulative distribution function (CDF) of $X$. Are exponentially distributed RV memoryless?
+
+    \begin{enumerate}
+        \item CDF: $P(X \le x)$, $X \sim Exp(\theta)$
+        
+        $\begin{aligned}[t]
+            F_X(x) & = \int_0^x f(u) \,du \\
+            & = \int_0^x \frac{1}{\theta} e^{-\frac{u}{\theta}} \,du \\
+            & = -e^{-\frac{u}{\theta}} \bigg|_{0}^x \\
+            & = 1 - e^{-\frac{x}{\theta}}
+        \end{aligned}$
+
+        That is, $F_X(x) = \begin{cases} 0 & x \le 0 \\ 1 - e^{-x/\theta} & x > 0 \end{cases}$
+
+        \item %TODO show memoryless
+    \end{enumerate}
+\end{definition}
 
 \begin{example}
     Previously, we modeled the number of shiba arrivals at the dog park over a day by a Poisson distribution. Suppose on average there are $5$ Shiba arrivals per day.
 
     \begin{enumerate}[label=\alph*)]
-        \item A Shiba just arrived at the dog park. What is the probability that you'll another one will arrive in the next day (full 24 hours)?
+        \item A Shiba just arrived at the dog park. What is the probability that another one will arrive in the next day (full 24 hours)?
         
         Let $T$ be the number of days until the next Shiba arrival. 
 
@@ -204,6 +267,13 @@ The previous example uses a common continuous distribution called the `\term{Uni
             P(T \ge 5 | T \ge 3) & = \frac{P(T \ge 5 \land T \ge 3)}{T \ge 3} \\
                                  & = \frac{P(T \ge 5)}{P(T \ge 3)}
         \end{aligned}$
+
+        OR $\begin{aligned}[t]
+            P(T \ge 2) & = 1 - P(T < 2) \\
+            & = 1 - F_T(2) \\
+            & = 1 - (1 - e^{-10}) \\
+            & \approx 0.00454\%
+        \end{aligned}$
     \end{enumerate}
 \end{example}
 
@@ -214,6 +284,89 @@ We have learned that the exponential distribution models the random interval unt
 What would the distribution of total time between the second and sixth shiba arrival look like? Will it also be exponential? What do you think?
 
 % TODO: see slides
+
+The exponential distribution that you learned, which can sometimes be used to model wait time, is quite limiting in its shape. The related \term{gamma distribution} that you're about to learn about is \bred{defined by two parameters} which offers more options and flexibility in modeling quantities that tend to be right-skewed. 
+
+\begin{center} \includegraphics[width=0.5\linewidth]{Gamma_distribution.png} \end{center}
+
+\begin{definition}[Gamma Distribution]\index{Gamma Distribution}
+    A \term{gamma distribution} with \bred{shape parameter} $\alpha > 0$ and \bred{scale parameter} $\beta > 0$ for a continuous random variable $X$ has probability density function $$f(x) = \begin{cases} \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha-1} e^{-\frac{x}{\beta}} & x > 0 \\ 0 & \text{otherwise} \end{cases}$$
+
+    $X$ has mean and variance $$E(X) = \alpha\beta \qquad \qquad V(X) = \alpha\beta^2$$
+\end{definition}
+
+\textbf{Note:}
+
+\begin{enumerate}\index{Gamma Function}
+    \item $\Gamma(\alpha)$ is the \term{gamma function} defined by $$\Gamma(\alpha) = \int_0^\infty x^{\alpha-1}e^{-x} \,dx$$
+    \item For $\alpha > 1$, $\Gamma(\alpha) = (\alpha - 1) \cdot \Gamma(\alpha - 1)$
+    \item For $\alpha \in \mathbb{Z}_+$, $\Gamma(\alpha) = (\alpha - 1)!$
+    \item $\Gamma\bracket{\frac{1}{2}} = \sqrt{\pi}$
+    \item When $\alpha = 1$, $Gamma(1, \beta) = Exp(\beta)$. That is,k the exponential distribution is a special case of the gamma distribution\footnote{$\beta$ is the scale parameter, not rate -- recall scale $\theta$ and rate $\lambda$ from exponential distribution}.
+    \item The sum of $n$ \bred{independent} $Exp(\theta)$ random variables $T = X_1 + X_2 + \cdots + X_n$, where $X_i \sim Exp(\theta)$, results in a gamma random variable with $T \sim \Gamma(n, \theta)$.
+    \item The CDF of $\Gamma(\alpha, \beta)$ has no closed form when $\alpha, \beta \notin \mathbb{Z}_+$, making it difficult to compute probabilities without R. 
+\end{enumerate}
+
+{~~~}
+
+Let's derive the expected value of Gamma.
+
+Let $X$ be a random variable, $X \sim \Gamma(\alpha, \beta)$. 
+
+Then, $f(x) = \begin{cases} \frac{1}{\Gamma(\alpha) \beta^\alpha} x^{\alpha-1} e^{-x/\beta} & x > 0 \\ 0 & \text{otherwise} \end{cases}$
+
+$\allowdisplaybreaks \begin{aligned}[t]
+    E(X) & = \int_0^\infty x \cdot f(x) \,dx                                                              \\
+         & = \int_0^\infty \frac{1}{\Gamma(\alpha) \beta^\alpha} x^{\color{red} \alpha} e^{-x/\beta} \,dx \\
+         & = \frac{1}{\Gamma(\alpha)\beta^\alpha} \int_0^\infty x^\alpha e^{-x/\beta} \,dx
+         & \text{Let $u = \frac{x}{\beta}$, $dx = \beta \,du$}                                            \\
+         & = \frac{1}{\Gamma(\alpha)\beta^\alpha} \int_0^\infty (u\beta)^\alpha e^{-u} \beta \,du         \\
+         & = \frac{1}{\Gamma(\alpha)\beta^\alpha} \int_0^\infty \beta^{\alpha+1} u^\alpha e^{-u} \,du     \\
+         & = \frac{\beta}{\Gamma(\alpha)} \int_0^\infty u^\alpha e^{-u} \,du
+\end{aligned}$
+
+\textbf{R Code Computation -- Gamma} 
+
+Since the CDF of a gamma random variable has no closed form solution, we can use R statistical software to compute probabilities when $\alpha, \beta \notin \mathbb{Z}$. 
+
+Given $X \sim \Gamma(\alpha, \beta) \dots$
+
+\begin{itemize}
+    \item $P (X \le k)$ is computed with \texttt{pgamma(k,shape=$\alpha$, scale=$\beta$)}. You MUST indicate whether you are using scale or rate parameters when using R since it allows for either: $\Gamma(shape, scale)$ or $\Gamma(shape, rate = \frac{1}{scale} = \frac{1}{\beta})$
+    \item To simulate $n$ data values from $X$, we use \texttt{rgamma(n,shape=$\alpha$,scale=$\beta$)}
+\end{itemize}
+
+\begin{example}
+    The number of service requests fulfilled by a technician at a support centre is Poisson distributed with an average of $10$ per workday (8 hours). How would you model the random time it takes to complete two unrelated and independent service requests by this technician? Find the probability that two service requests takes more than $3$ hours to fulfill.
+
+    Let $R$ be the number of service requests per workday (8 hours). 
+
+    $R \sim Pois(\lambda = 10)$. 
+
+    Let $T_i$ be the time in hours to fulfill the $i$\textsuperscript{th} service request. 
+
+    $T_i \sim Exp\bracket{\theta = \frac{8}{10}}$. 
+
+    Want to model $Y = T_1 + T_2 \sim \Gamma(\alpha = 2, \beta = 0.8)$. 
+
+    $f(y) = \begin{cases} \frac{1}{\Gamma(2) 0.8^2} y^{2-1} e^{-y/0.8} & y > 0 \\ 0 & \text{otherwise} \end{cases} = \begin{cases} \frac{1}{0.64} y e^{-y/0.8} & y > 0 \\ 0 & \text{otherwise} \end{cases}$
+
+    $\begin{aligned}[t]
+        P(Y > 3) & = \int_3^\infty \frac{1}{0.64} y e^{-y/0.8} \,dy                                          \\
+                 & = \frac{1}{0.64} \int_3^\infty y e^{-y/0.8} \,dy                                          \\
+                 & = \frac{1}{0.64} \left[ -0.8y e^{-y/0.8} - 0.64 e^{-y/0.8} \right] \bigg|_3^\infty        \\
+                 & = \frac{1}{0.64} \left[ 0 - 0 + 0.8y e^{-3/0.8} + 0.64 e^{-3/0.8} \right] \bigg|_3^\infty \\
+                 & \approx 11.17\%
+    \end{aligned}$
+
+    $\therefore$ There is $11.17\%$ chance that 2 service requests take more than 3 hours. 
+
+    {~~~}
+
+    Using R to compute $P(T > 3) = 1 - P(T \le 3)$, we use \texttt{1-pgamma(3,shape=2,scale=0.8)}. 
+\end{example}
+
+% TODO: Exact vs Chebyshev's Inequality (Week 9 pp.15-16)
 
 \section{Percentile}
 
@@ -226,6 +379,7 @@ What would the distribution of total time between the second and sixth shiba arr
 \begin{itemize}
     \item The \term{median} is also called the $50$\textsuperscript{th} percentile
     \item The \term{first quartile} and \term{third quartile} are the $25$\textsuperscript{th} and $75$\textsuperscript{th} percentiles, respectively. 
+    \item Measure of spread called \textrm{Inter Quartile Range} (IQR) $ = Q_3 - Q_1$. 
 \end{itemize}
 
 \begin{example}
@@ -238,7 +392,9 @@ What would the distribution of total time between the second and sixth shiba arr
         m^3 \bigg|_{0}^{m_{0.5}}     & = 0.5           \\
         {m_{0.5}}^3                  & = 0.5           \\
         m_{0.5}                      & = \sqrt[3]{0.5} \\
-                                     & \approx 0.79
+                                     & \approx 0.7937
     \end{aligned}$
+
+    Thus, $50\%$ of the time, $M$ will take on a value larger than $0.7937$.
 \end{example}
 
