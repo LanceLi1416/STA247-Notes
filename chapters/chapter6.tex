@@ -65,3 +65,264 @@ The table is an example of a \term{joint probability distribution}.
 
     If $\forall (x, y) \in (X, Y)$, $f(x, y) = f_X(x) \cdot f_Y(y)$, the $X$ and $Y$ are \term{independent}. otherwise, $X$ and $Y$ are said to be \term{dependent}. 
 \end{definition}
+
+\begin{example}
+    Using the same data, \begin{center}
+        \begin{tabular}{c | c | c | c | c}
+                                    &       & \multicolumn{2}{c|}{High Blood Pressure}      &                       \\
+            \hline
+                                    &       & Yes                   & No                    & Total                 \\
+            \hline \hline                                             
+            \multirow{2}{*}{Smoker} & Yes   & $10.03\%$             & $22.08\%$             & $\color{blue}32.11\%$ \\
+                                    & No    & $25.08\%$             & $42.81\%$             & $\color{blue}67.89\%$ \\
+            \hline \hline                                 
+            $\color{blue}P(H = h)$  & Total & $\color{blue}35.11\%$ & $\color{blue}65.89\%$ & $100\%$               \\
+        \end{tabular}
+    \end{center}
+
+    \begin{enumerate}[label=\alph*)]
+        \item Find the distribution of high blood pressure among heart failure patients. 
+        \item Consider how you might construct a \itblue{conditional distribution} of a patient's high-blood-pressure status if you know the patient is a smoker. Your probabilities should still sum to $1$ if done correctly. 
+
+        % TODO: Week 10 pp.7
+    \end{enumerate}
+\end{example}
+
+\section{Bivariate Distributions}
+
+\begin{itemize}
+    \item In the univariate case, we used the probability \bred{density} function to find the probability \bred{mass} of an event.
+    \item We achieved this by finding the area under the density function \itblue{in the interval corresponding to the event}.
+    \begin{itemize}
+        \item $P(a \le X \le b)$ is computed by finding the area under the PDF on the interval $[a, b]$. 
+    \end{itemize}
+    \item In the bivariate case, the probability density function provides the \itblue{density of two variables} as they occur together. We can use the density function to find the probability \bred{mass} of events by computing the \bred{volume} under the density curve corresponding to the \bred{event region}.
+    \item This will require us to integrate over an \bred{event area} instead of an interval. We must ensure that the limits of our integration map out the correct area corresponding to the event!
+\end{itemize}
+
+The most challenging and crucial step with working with joint PDF is finding the correct limits of integration for probability computation or related probability density function derivations, followed by identifying what these functions represent. Here are some useful tips. 
+
+\begin{enumerate}
+    \item Carefully sketch out the support of the PDF -- not all joint PDFs will be defined over an infinitely large interval! This is help you be more aware of where your PDF is non-zero for integration.
+    \item Identify and shade in the area of the support from step 1 corresponding to the event you are trying to find. 
+    \item Keep in mind that in integration, you are integrating over one variable (one direction) completely before you start integrating over the other variable. It helps to have the area from step 2 to ensure that your limits of integration correspond with the `filling out this area' 
+    \begin{itemize}
+        \item Start by finding your numerical limits 
+        \item Then find function limits corresponding to that interval 
+    \end{itemize}
+\end{enumerate}
+
+\begin{example}
+    The joint density of $X$, the proportion of the capacity of a tank that is stocked with gasoline at the beginning of the week, and $Y$, the proportion of the capacity sold during the week, is given by $$f(x, y) = \begin{cases} 3x & 0 \le y \le x \le 1 \\ 0 & \text{otherwise} \end{cases}$$
+
+    % TODO: plot the graph (Week 10 pp.11)
+
+    \begin{enumerate}[label=\alph*)]
+        \item Find $F\bracket{\frac{1}{2}, \frac{1}{3}} = P\bracket{X \le \frac{1}{2}, Y \le \frac{1}{3}}$
+        
+        $\begin{aligned}[t]
+            P\bracket{X \le \frac{1}{2}, Y \le \frac{1}{3}} & = \int_{y=0}^{y=\frac{1}{3}} \int_{x=y}^{x=\frac{1}{2}} f(x, y) \,dx \,dy      \\
+                                                            & = \int_{y=0}^{y=\frac{1}{3}} \int_{x=y}^{x=\frac{1}{2}} 3x \,dx \,dy           \\
+                                                            & = \int_{y=0}^{y=\frac{1}{3}} \frac{3}{2} x^2 \bigg|_{x=y}^{x=\frac{1}{2}} \,dy \\
+                                                            & = \int_{y=0}^{y=\frac{1}{3}} \frac{3}{8} - \frac{3}{2} y^2 \,dy                \\
+                                                            & = \bracket{\frac{3}{8}y - \frac{1}{2} y^3} \bigg|_0^\frac{1}{3}                \\
+                                                            & = \frac{23}{216}                                                               \\
+                                                            & \approx 10.65\%
+        \end{aligned}$
+
+        % TODO: the other integration (Week 10 pp.11)
+
+        \item Find $P\bracket{Y \le \frac{X}{2}}$ and interpret. 
+
+        % TODO: plot (Week 10 pp.12)
+
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                P\bracket{X \le \frac{x}{2}} & = \int_{x=0}^{x=1} \int_{y=0}^{y=\frac{x}{2}} 3x \,dy \,dx \\
+                                             & = \int_{x=0}^{x=1} 3xy \bigg|_{y=1}^{y=\frac{x}{2}} \,dx   \\
+                                             & = \int_0^1 \frac{3}{2}x^2 \,dx                             \\
+                                             & = \frac{1}{2} x^3 \bigg|_0^1                               \\
+                                             & = \frac{1}{2}
+            \end{aligned}$
+        \end{minipage}
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                P\bracket{X \le \frac{x}{2}} & = \int_{y=0}^{y=\frac{1}{2}} \int_{x=2y}^{x=1} 3x \,dx \,dy          \\
+                                             & = \int_{y=0}^{y=\frac{1}{2}} \frac{3}{2}x^2 \bigg|_{x=2y}^{x=1} \,dy \\
+                                             & = \int_0^{\frac{1}{2}} \frac{3}{2} - 6y^2 \,dy                       \\
+                                             & = \frac{3}{2}y - 2y^3 \bigg|_0^{\frac{1}{2}}                         \\
+                                             & = \frac{1}{2}
+            \end{aligned}$
+        \end{minipage}
+
+        This is the probability that at most half of gasoline stocked is sold. 
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Joint Distribution Function / CDF]\index{Joint Distribution Function / CDF}
+    The \term{joint distribution function} of two random variables $X$ and $Y$ is defined as $$F(a, b) = P(X \le a, Y \le b)$$
+
+    \begin{itemize}
+        \item When $X$ and $Y$ are discrete, this can be calculated via summation by $$F(a, b) = \sum_{x=-\infty}^a \sum_{y=-\infty}^b f(x, y)$$
+        \item When $X$ and $Y$ are continuous, this can be calculated via integration (volume under the density surface) by $$F(a, b) = \int_{-\infty}^a \int_{-\infty}^b f(x, y) \,dy \,dx$$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Expected Value of $XY$]\index{Expected Value of $XY$}
+    If $X$ and $Y$ are two joint random variables with PMF / PDF $f(x, y)$, then the \term{expected values of $XY$} (their product) is given by 
+
+    \begin{itemize}
+        \item $E(XY) = \sum_{x \in X}^{y \in Y} xy \cdot f(x, y)$ if $X$ and $Y$ are discrete
+        \item $E(XY) = \int_{-\infty}^\infty \int_{-\infty}^\infty xy \cdot f(x, y) \,dy \,dx$ if $X$ and $Y$ are continuous 
+    \end{itemize}
+\end{definition}
+
+\bred{Caution:} $E(XY) \neq E(X) \cdot E(Y)$ \itblue{except when $X$ and $Y$ are independent}. $E(XY)$ will be useful to us when we learn about covariance later on, but is not necessarily a practical. 
+
+We can find \bred{any} expected value of a function of $(X, Y)$ by using the same PMF / PDF $f(x, y)$. For example, we can compute $E(X + Y)$ as above by replacing $xy$ with $(x + y)$.
+
+{~~~}
+
+In general, for any real-valued function $g(X, Y)$, we can find its expected value using the joint PMF / PDF. We take the weighted average / weighted density of each outcome $g(x, y)$.
+
+\begin{definition}[Expected Value of $g(X, Y)$]\index{Expected Value of $g(X, Y)$}
+    If $g(x, y)$ is a real-valued function of $(X, Y)$, then the expected value is given by 
+    $$E\bracket{g(X, Y)} = \sum_{x \in X} \sum_{y \in Y} g(x, y) \cdot f(x, y)$$
+    $$E\bracket{g(X, Y)} = \int_{x \in X} \int_{y \in Y} g(x, y) \cdot f(x, y) \,dy \,dx$$
+\end{definition}
+
+\section{Covariance of Jointly Distributed Random Variables}
+
+\begin{definition}[Covariance of $X$, $Y$]\index{Covariance}\index{Correlation}
+    The \term{covariance} is a \itblue{measure that allows us to assess the association between $X$ and $Y$}. If $X$ and $Y$ are two random variables with a joint probability mass / density function $f(x, y)$, then the covariance is given by $$\sigma_{XY} = Cov(X, Y) = E\bracket{(X - \mu_X)(Y - \mu_Y)} = E(XY) - E(X)E(Y)$$
+    
+    The covariance measure depends on the units and scale of $X$ and $Y$. In order to get a unit-less measure of linear association between $X$ and $Y$, we have the \term{correlation} $$\rho = \frac{Cov(X, Y)}{\sqrt{V(X)V(Y)}}$$ $\rho$ is often called the \term{correlation coefficient}, and $-1 \le \rho \le 1$ where $\rho = \pm 1$ indicates a perfect positive / negative linear association. 
+\end{definition}
+
+\setcounter{exampleT}{1}
+\begin{example}[Count.]
+    \text{ }
+
+    \begin{enumerate}[label=\alph*)]
+        \setcounter{enumi}{2}
+        \item Find  the covariance and correlation of $X$ and $Y$. 
+
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                f_X(x) & = \int_{y \in Y} f(x, y) \,dy \\
+                       & = \int_0^x 3x \,dy            \\
+                       & = 3xy \bigg|_0^x              \\
+                       & = 3x^3
+            \end{aligned}$
+        \end{minipage}
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                f_Y(y) & = \int_{x \in X} f(x, y) \,dx                \\
+                       & = \int_{\color{red}y}^{\color{red}1} 3x \,dx \\
+                       & = \frac{3}{2} x^2 \bigg|_y^1                 \\
+                       & = \frac{3}{2} - \frac{3}{2}y^2
+            \end{aligned}$
+        \end{minipage}
+
+        {~~~}
+        
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                E(XY) & = \int_{x=0}^{x=1} \int_{y=0}^{y=1} xy \cdot f(x, y) \,dy \,dx \\
+                      & = \int_{x=0}^{x=1} \frac{3}{2} x^2 y^2 \bigg|_{y=0}^{y=x} \,dx \\
+                      & = \int_0^1 \frac{3}{2} x^4 \,dx                                \\
+                      & = \frac{3}{10} x^5 \bigg|_0^1                                  \\
+                      & = \frac{3}{10}
+            \end{aligned}$
+        \end{minipage}
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                E(X) & = \int_0^1 x \cdot f_X(x) \,dx      \\
+                     & = \int_0^1 x \cdot x \cot 3x^2 \,dx \\
+                     & = \frac{3}{4}
+            \end{aligned}$
+
+            $\begin{aligned}[t]
+                E(Y) & = \int_0^1 x \cdot f_Y(y) \,dy                                        \\
+                     & = \int_0^1 x \cdot y \cot \bracket{\frac{3}{2} - \frac{3}{2}y^2} \,dy \\
+                     & = \frac{3}{8}
+            \end{aligned}$
+        \end{minipage}
+
+        {~~~}
+
+        $\begin{aligned}
+            Cov(X, Y) = \sigma_{XY} & = E(XY) - E(X)E(Y)                             \\
+                                    & = \frac{3}{10} - \frac{3}{4} \cdot \frac{3}{8} \\
+                                    & = \frac{3}{160} \approx 0.0188
+        \end{aligned}$
+
+        {~~~}
+
+        {~~~}
+
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                E(X^2) & = \int_0^1 x^2 \cdot f_X(x) \,dx \\
+                       & = \int_0^1 3x^4 \,dx             \\
+                       & = \frac{3}{5} x^5 \bigg|_0^1     \\
+                       & = \frac{3}{5}
+            \end{aligned}$
+
+            Thus, $\begin{aligned}[t]
+                V(X) & = E(X^2) - E(X)^2                       \\
+                    %  & = \frac{3}{5} - \bracket{\frac{3}{4}}^2 \\
+                     & = \frac{3}{80}
+            \end{aligned}$
+        \end{minipage}
+        \begin{minipage}[t]{0.45\linewidth}
+            $\begin{aligned}[t]
+                E(Y^2) & = \int_0^1 x^2 \cdot f_Y(y) \,dy                          \\
+                       & = \int_0^1 \frac{3}{2} y^2 - \frac{3}{2}y^4 \,dy          \\
+                       & = \bracket{\frac{1}{2} y^3 - \frac{3}{10} y^5} \bigg|_0^1 \\
+                       & = \frac{1}{5}
+            \end{aligned}$
+
+            Thus, $\begin{aligned}[t]
+                V(Y) & = E(Y^2) - E(Y)^2                       \\
+                    %  & = \frac{1}{5} - \bracket{\frac{3}{8}}^2 \\
+                     & = \frac{19}{320}
+            \end{aligned}$
+        \end{minipage}
+
+        {~~~}
+
+        $\begin{aligned}[t]
+            \rho & = \frac{Cov(X, Y)}{\sqrt{V(X)V(Y)}}                              \\
+                 & = \frac{\frac{3}{160}}{\sqrt{\frac{3}{80} \cdot \frac{19}{320}}} \\
+                 & = \sqrt{\frac{3}{19}} \approx 0.3974
+        \end{aligned}$
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}[Properties of Covariance]
+    For constants $a$, $b$, $c$, $d$ and continuous random variables $X$, $Y$, and $Z$, 
+
+    \begin{itemize}
+        \item $Cov(X, X) = var(X) = \sigma_X^2$
+        \item $Cov(aX + b, cY + d) = ac \cdot Cov(X, Y) = ac \cdot \sigma_{XY}$
+        \item $Cov(X, Y) = Cov(Y, X)$
+        \item $Cov(aX, bY + cZ) = ab \cdot Cov(X, Y) + ac \cdot Cov(X, Z)$
+        \item If \bred{$X$ and $Y$ are independent}, then $Cov(X, Y) = 0$
+
+        \itblue{The converse is not true}, except when $X$ and $Y$ are normally distributed ($X \perp Y \iff \sigma_{XY} = 0$)
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Properties of Expected Values and Variance]
+    Returning to the expected value and variance of two random variables $X$ and $Y$, 
+
+    \begin{itemize}
+        \item $E(aX + bY + c) = aE(X) + bE(Y) + c$
+        \item $E(XY) = E(X) \cdot E(Y)$ \bred{only if} $X$ and $Y$ are independent. Otherwise $E(XY) \neq E(X) \cdot E(Y)$.
+        \item $V(X + Y) = V(X) + V(Y) + 2Cov(X, Y) = \sigma_X^2 + \sigma_Y^2 + 2\sigma_{XY}$
+        \item $V(aX + bY) = a^2V(X) + b^2V(Y) + 2ab \cdot Cov(X, Y)$
+    \end{itemize}
+\end{theorem}
+
+Hence, in previous lectures, $V(X + Y) = V(X) + V(Y)$ \bred{only if} $X$ and $Y$ are independent!
